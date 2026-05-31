@@ -1,0 +1,419 @@
+# create-site.ps1 — генератор сайта «Вина Болгарии» для Windows (PowerShell).
+#
+# Создаёт всю структуру проекта с нуля: папки assets\ и цельный index.html.
+#
+# Использование (в PowerShell):
+#   .\create-site.ps1            # создать сайт в текущей папке
+#   .\create-site.ps1 путь\папка # создать сайт в указанной папке
+#
+# Если PowerShell не даёт запустить скрипт, один раз выполните:
+#   Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+
+param(
+    [string]$Dest = "."
+)
+
+$ErrorActionPreference = "Stop"
+
+# Создаём папки.
+New-Item -ItemType Directory -Force -Path (Join-Path $Dest "assets\photos") | Out-Null
+New-Item -ItemType Directory -Force -Path (Join-Path $Dest "assets\logo")   | Out-Null
+
+# Плейсхолдеры (в кодировке UTF-8, чтобы кириллица не ломалась).
+$utf8 = New-Object System.Text.UTF8Encoding($false)
+[System.IO.File]::WriteAllText(
+    (Join-Path $Dest "assets\photos\КЛАДИТЕ_ФОТО_СЮДА.txt"),
+    "Кладите сюда фотографии: бутылки, виноградники, блюда.", $utf8)
+[System.IO.File]::WriteAllText(
+    (Join-Path $Dest "assets\logo\ЛОГОТИП_СЮДА.txt"),
+    "Кладите сюда логотип представительства.", $utf8)
+
+# Сам сайт. Here-string @' ... '@ записывается дословно.
+$html = @'
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Вина Болгарии — Katarzyna Estate · Black Sea Gold · SIS Industries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Forum&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#4a1320;
+    --wine-deep:#2e0c15;
+    --terra:#b9542d;
+    --gold:#c8a24a;
+    --gold-soft:#d8bd7e;
+    --cream:#f3e9d8;
+    --cream-deep:#ebddc6;
+    --paper:#f6efe2;
+    --ink:#2a1d17;
+    --ink-soft:#5c4a3e;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Manrope',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* grain overlay */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .eyebrow{
+    font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.35em;
+    font-size:.72rem;color:var(--gold);
+  }
+  h1,h2,h3{font-family:'Prata',serif;font-weight:400;line-height:1.08}
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.6rem 6vw;transition:.4s ease;
+  }
+  nav.scrolled{
+    background:rgba(46,12,21,.92);backdrop-filter:blur(10px);
+    padding:1rem 6vw;box-shadow:0 8px 30px rgba(0,0,0,.25);
+  }
+  .brand{font-family:'Prata',serif;font-size:1.35rem;color:var(--cream);letter-spacing:.02em}
+  .brand span{color:var(--gold)}
+  .nav-links{display:flex;gap:2.4rem;align-items:center}
+  .nav-links a{
+    color:var(--cream);text-decoration:none;font-size:.85rem;letter-spacing:.05em;
+    opacity:.85;transition:.3s;font-weight:400;
+  }
+  .nav-links a:hover{opacity:1;color:var(--gold-soft)}
+  .nav-cta{
+    border:1px solid var(--gold);color:var(--gold)!important;
+    padding:.6rem 1.4rem;border-radius:2px;opacity:1!important;
+  }
+  .nav-cta:hover{background:var(--gold);color:var(--wine-deep)!important}
+  @media(max-width:860px){.nav-links a:not(.nav-cta){display:none}}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;min-height:100vh;display:flex;align-items:center;
+    background:
+      radial-gradient(120% 90% at 80% 10%, #6a1d2c 0%, var(--wine) 35%, var(--wine-deep) 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(60% 50% at 15% 85%, rgba(200,162,74,.18), transparent 70%);
+  }
+  .hero-grid{
+    position:relative;z-index:2;display:grid;grid-template-columns:1.25fr .75fr;
+    width:100%;padding:0 6vw;gap:3rem;align-items:center;
+  }
+  .hero-text{max-width:640px}
+  .hero-text .eyebrow{opacity:0;animation:rise .9s .2s forwards}
+  .hero h1{
+    color:var(--cream);font-size:clamp(2.8rem,6.2vw,5.4rem);margin:1.4rem 0;
+    opacity:0;animation:rise 1s .35s forwards;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero p{
+    color:rgba(243,233,216,.78);font-size:1.12rem;line-height:1.7;max-width:480px;font-weight:300;
+    opacity:0;animation:rise 1s .5s forwards;
+  }
+  .hero-actions{margin-top:2.6rem;display:flex;gap:1.2rem;flex-wrap:wrap;
+    opacity:0;animation:rise 1s .65s forwards;}
+  .btn{
+    font-family:'Manrope';font-size:.92rem;letter-spacing:.04em;font-weight:500;
+    padding:1rem 2.2rem;border-radius:2px;cursor:pointer;text-decoration:none;
+    transition:.35s ease;border:1px solid transparent;display:inline-block;
+  }
+  .btn-gold{background:var(--gold);color:var(--wine-deep)}
+  .btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 12px 28px rgba(200,162,74,.3)}
+  .btn-ghost{border-color:rgba(243,233,216,.4);color:var(--cream)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
+
+  /* CSS bottle */
+  .bottle-wrap{display:flex;justify-content:center;opacity:0;animation:rise 1.2s .7s forwards}
+  .bottle{position:relative;width:120px;height:430px;filter:drop-shadow(0 30px 40px rgba(0,0,0,.45))}
+  .bottle .neck{position:absolute;top:0;left:50%;transform:translateX(-50%);
+    width:34px;height:120px;background:linear-gradient(90deg,#1c3a2e,#2e5c47 45%,#16332a);border-radius:6px 6px 0 0}
+  .bottle .neck::before{content:"";position:absolute;top:8px;left:0;right:0;height:26px;
+    background:linear-gradient(90deg,#7a1322,#a8253a 50%,#5e0f1b)}
+  .bottle .body{position:absolute;top:108px;left:50%;transform:translateX(-50%);
+    width:120px;height:322px;border-radius:18px 18px 26px 26px;
+    background:linear-gradient(90deg,#16332a,#2e5c47 42%,#3d7058 55%,#16332a);}
+  .bottle .shine{position:absolute;top:130px;left:calc(50% - 38px);width:12px;height:250px;border-radius:8px;
+    background:linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.05));filter:blur(2px)}
+  .bottle .label{position:absolute;top:200px;left:50%;transform:translateX(-50%);
+    width:92px;height:140px;background:linear-gradient(180deg,#f6efe2,#e8dcc4);border-radius:3px;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px}
+  .bottle .label .crest{width:30px;height:30px;border:1.5px solid var(--wine);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;color:var(--wine);font-family:'Prata';font-size:.85rem}
+  .bottle .label .lt{font-family:'Forum';font-size:.5rem;letter-spacing:.18em;color:var(--wine);text-transform:uppercase}
+  .bottle .label .ln{font-family:'Prata';font-size:.62rem;color:var(--ink);text-align:center;line-height:1.2}
+  .bottle .label .lr{width:34px;height:1px;background:var(--gold)}
+
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:860px){.hero-grid{grid-template-columns:1fr}.bottle-wrap{display:none}}
+
+  /* ---------- STRIP ---------- */
+  .strip{background:var(--wine-deep);color:var(--cream);padding:2.4rem 6vw;
+    display:flex;justify-content:space-around;gap:2rem;flex-wrap:wrap;text-align:center}
+  .strip div{flex:1;min-width:160px}
+  .strip .num{font-family:'Prata';font-size:2.4rem;color:var(--gold)}
+  .strip .lbl{font-size:.82rem;letter-spacing:.08em;opacity:.75;margin-top:.4rem;font-weight:300}
+
+  /* ---------- SECTION BASE ---------- */
+  section{padding:7rem 6vw}
+  .reveal{opacity:0;transform:translateY(36px);transition:.9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+  .center{text-align:center;max-width:680px;margin:0 auto 4rem}
+  .center h2{font-size:clamp(2rem,4vw,3.2rem);color:var(--wine);margin:1.1rem 0}
+  .center p{color:var(--ink-soft);font-size:1.05rem;line-height:1.75;font-weight:300}
+
+  /* ---------- PRODUCERS ---------- */
+  .producers{background:var(--paper)}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+  .card{
+    background:linear-gradient(180deg,#fffaf0,#f1e6d2);border-radius:6px;overflow:hidden;
+    box-shadow:0 1px 0 rgba(0,0,0,.04);transition:.45s ease;border:1px solid rgba(42,29,23,.06);
+  }
+  .card:hover{transform:translateY(-8px);box-shadow:0 30px 50px rgba(74,19,32,.18)}
+  .card-top{height:190px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .c1 .card-top{background:radial-gradient(circle at 50% 40%,#7a2235,#3a0f1a)}
+  .c2 .card-top{background:radial-gradient(circle at 50% 40%,#1d5a7a,#0c2438)}
+  .c3 .card-top{background:radial-gradient(circle at 50% 40%,#9a6a2a,#4a3010)}
+  .card-top .mono{font-family:'Prata';font-size:3.4rem;color:rgba(255,255,255,.92)}
+  .card-top .ring{position:absolute;width:120px;height:120px;border:1px solid rgba(255,255,255,.25);border-radius:50%}
+  .card-body{padding:2rem 1.8rem 2.2rem}
+  .card-body .eyebrow{color:var(--terra)}
+  .card-body h3{font-size:1.5rem;color:var(--wine);margin:.6rem 0 .8rem}
+  .card-body p{color:var(--ink-soft);font-size:.95rem;line-height:1.65;font-weight:300}
+  .card-body .tags{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.5rem}
+  .tag{font-size:.72rem;letter-spacing:.04em;padding:.35rem .8rem;border-radius:30px;
+    background:rgba(74,19,32,.07);color:var(--wine)}
+  @media(max-width:860px){.cards{grid-template-columns:1fr}}
+
+  /* ---------- GASTRO ---------- */
+  .gastro{background:linear-gradient(160deg,#5c1a2b,#2e0c15);color:var(--cream);
+    display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+  .gastro .eyebrow{color:var(--gold-soft)}
+  .gastro h2{font-size:clamp(2rem,3.8vw,3rem);color:var(--cream);margin:1.2rem 0 1.6rem}
+  .gastro p{color:rgba(243,233,216,.8);line-height:1.8;font-weight:300;font-size:1.05rem}
+  .pairings{margin-top:2rem;display:flex;flex-direction:column;gap:1.1rem}
+  .pair{display:flex;align-items:baseline;gap:1rem;padding-bottom:1.1rem;border-bottom:1px solid rgba(243,233,216,.14)}
+  .pair .p-wine{font-family:'Prata';color:var(--gold-soft);font-size:1.05rem;min-width:46%}
+  .pair .p-food{color:rgba(243,233,216,.7);font-size:.92rem;font-weight:300}
+  .gastro-visual{display:flex;justify-content:center;align-items:center}
+  .glass{width:200px;height:300px;position:relative}
+  .glass .bowl{position:absolute;top:0;left:50%;transform:translateX(-50%);width:150px;height:160px;
+    border:2px solid rgba(216,189,126,.5);border-top:none;border-radius:0 0 90px 90px;overflow:hidden}
+  .glass .liquid{position:absolute;bottom:0;left:0;right:0;height:60%;
+    background:linear-gradient(180deg,rgba(122,34,53,.55),#5c1320)}
+  .glass .stem{position:absolute;top:160px;left:50%;transform:translateX(-50%);width:3px;height:90px;background:rgba(216,189,126,.45)}
+  .glass .base{position:absolute;top:248px;left:50%;transform:translateX(-50%);width:110px;height:14px;
+    border:2px solid rgba(216,189,126,.45);border-radius:50%}
+  @media(max-width:860px){.gastro{grid-template-columns:1fr}.gastro-visual{display:none}}
+
+  /* ---------- PROCESS ---------- */
+  .process{background:var(--cream)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:2.5rem;margin-top:1rem}
+  .step{text-align:center}
+  .step .n{font-family:'Prata';font-size:1.4rem;color:var(--cream);background:var(--wine);
+    width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1.4rem}
+  .step h3{font-size:1.25rem;color:var(--wine);margin-bottom:.7rem}
+  .step p{color:var(--ink-soft);font-size:.93rem;line-height:1.6;font-weight:300}
+  @media(max-width:860px){.steps{grid-template-columns:1fr;gap:2rem}}
+
+  /* ---------- CTA ---------- */
+  .cta{background:radial-gradient(120% 100% at 50% 0%,#6a1d2c,#2e0c15);color:var(--cream);text-align:center}
+  .cta h2{font-size:clamp(2.2rem,4.5vw,3.6rem);color:var(--cream);margin-bottom:1.3rem}
+  .cta p{color:rgba(243,233,216,.8);max-width:540px;margin:0 auto 2.6rem;line-height:1.7;font-weight:300}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--wine-deep);color:rgba(243,233,216,.6);padding:3rem 6vw;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;font-size:.85rem;font-weight:300}
+  footer .brand{font-size:1.1rem}
+  footer a{color:var(--gold-soft);text-decoration:none}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="brand">Вина <span>Болгарии</span></div>
+  <div class="nav-links">
+    <a href="#producers">Винодельни</a>
+    <a href="#gastro">Гастрономия</a>
+    <a href="#process">Сотрудничество</a>
+    <a href="#contact" class="nav-cta">Запросить прайс</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-grid">
+    <div class="hero-text">
+      <div class="eyebrow">Болгария · Импорт вин и крепких напитков</div>
+      <h1>Солнце Фракии <em>в каждом</em> бокале</h1>
+      <p>Эксклюзивное представительство болгарских винодельческих домов на российском рынке. Вина и крепкие напитки с защищённым происхождением — напрямую от производителя.</p>
+      <div class="hero-actions">
+        <a href="#producers" class="btn btn-gold">Наши винодельни</a>
+        <a href="#contact" class="btn btn-ghost">Стать партнёром</a>
+      </div>
+    </div>
+    <div class="bottle-wrap">
+      <div class="bottle">
+        <div class="neck"></div>
+        <div class="body"></div>
+        <div class="shine"></div>
+        <div class="label">
+          <div class="crest">K</div>
+          <div class="lt">Estate</div>
+          <div class="lr"></div>
+          <div class="ln">Reserve<br>2021</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- STRIP -->
+<div class="strip">
+  <div><div class="num">3</div><div class="lbl">винодельческих дома</div></div>
+  <div><div class="num">120+</div><div class="lbl">лет винодельческих традиций</div></div>
+  <div><div class="num">PDO</div><div class="lbl">защищённое происхождение</div></div>
+  <div><div class="num">Москва</div><div class="lbl">доставка по РФ</div></div>
+</div>
+
+<!-- PRODUCERS -->
+<section class="producers" id="producers">
+  <div class="center reveal">
+    <div class="eyebrow">Портфель производителей</div>
+    <h2>Три легендарных дома Болгарии</h2>
+    <p>Мы представляем винодельни, чьи вина признаны на международных конкурсах и отражают характер болгарского терруара — от черноморского побережья до долин Фракии.</p>
+  </div>
+  <div class="cards">
+    <div class="card c1 reveal">
+      <div class="card-top"><div class="ring"></div><div class="mono">K</div></div>
+      <div class="card-body">
+        <div class="eyebrow">Долина Фракии</div>
+        <h3>Katarzyna Estate</h3>
+        <p>Премиальное хозяйство у границы с Грецией. Терруарные вина из Каберне, Мерло и Сиры, выдержанные во французском дубе. Эталон болгарского виноделия высокой категории.</p>
+        <div class="tags"><span class="tag">Красные купажи</span><span class="tag">Резерв</span><span class="tag">Премиум</span></div>
+      </div>
+    </div>
+    <div class="card c2 reveal">
+      <div class="card-top"><div class="ring"></div><div class="mono">B</div></div>
+      <div class="card-body">
+        <div class="eyebrow">Черноморское побережье</div>
+        <h3>Black Sea Gold</h3>
+        <p>Историческая винодельня в Поморие с погребами времён античности. Свежие белые, ароматные мускаты и игристые вина, рождённые морским климатом побережья.</p>
+        <div class="tags"><span class="tag">Белые вина</span><span class="tag">Игристое</span><span class="tag">Мускат</span></div>
+      </div>
+    </div>
+    <div class="card c3 reveal">
+      <div class="card-top"><div class="ring"></div><div class="mono">S</div></div>
+      <div class="card-body">
+        <div class="eyebrow">Крепкие напитки</div>
+        <h3>SIS Industries</h3>
+        <p>Производитель крепких напитков и спиртов с современным заводом. Бренди, ракия и фруктовые дистилляты, созданные по болгарским традициям перегонки.</p>
+        <div class="tags"><span class="tag">Бренди</span><span class="tag">Ракия</span><span class="tag">Дистилляты</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GASTRO -->
+<section class="gastro" id="gastro">
+  <div class="reveal">
+    <div class="eyebrow">Гастрономия</div>
+    <h2>Вина, созданные для стола</h2>
+    <p>Болгарские вина рождены рядом с едой — они раскрываются в компании мяса на углях, выдержанных сыров и щедрых блюд. Несколько сочетаний, которые мы рекомендуем гостям и ресторанным партнёрам.</p>
+    <div class="pairings">
+      <div class="pair"><span class="p-wine">Каберне Резерв</span><span class="p-food">баранина на гриле, телятина, твёрдые сыры</span></div>
+      <div class="pair"><span class="p-wine">Мускат Черноморский</span><span class="p-food">морепродукты, паштеты, фруктовые десерты</span></div>
+      <div class="pair"><span class="p-wine">Болгарская ракия</span><span class="p-food">мезе, копчёности, домашние соленья</span></div>
+    </div>
+  </div>
+  <div class="gastro-visual reveal">
+    <div class="glass">
+      <div class="bowl"><div class="liquid"></div></div>
+      <div class="stem"></div>
+      <div class="base"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process" id="process">
+  <div class="center reveal">
+    <div class="eyebrow">Как мы работаем</div>
+    <h2>Сотрудничество без посредников</h2>
+  </div>
+  <div class="steps">
+    <div class="step reveal">
+      <div class="n">1</div>
+      <h3>Подбор ассортимента</h3>
+      <p>Формируем линейку под ваш формат — ресторан, винотека или дистрибуция. Презентация и дегустационные образцы.</p>
+    </div>
+    <div class="step reveal">
+      <div class="n">2</div>
+      <h3>Прайс и логистика</h3>
+      <p>Прозрачные цены от производителя, расчёт доставки до Москвы и регионов, полное сопровождение поставки.</p>
+    </div>
+    <div class="step reveal">
+      <div class="n">3</div>
+      <h3>Поддержка продаж</h3>
+      <p>Материалы на русском языке, описания вин, обучение персонала и помощь в продвижении на полке и в меню.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta" id="contact">
+  <div class="reveal">
+    <div class="eyebrow">Свяжитесь с нами</div>
+    <h2>Запросите презентацию<br>и прайс-лист</h2>
+    <p>Пришлём каталог болгарских вин и крепких напитков на русском языке, актуальные цены и условия доставки в вашем городе.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a href="mailto:info@example.com" class="btn btn-gold">Написать на почту</a>
+      <a href="tel:+70000000000" class="btn btn-ghost">Позвонить</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <div class="brand">Вина <span style="color:var(--gold)">Болгарии</span></div>
+    <div style="margin-top:.6rem">Официальный представитель болгарских производителей в РФ</div>
+  </div>
+  <div>
+    Katarzyna Estate · Black Sea Gold · SIS Industries<br>
+    <a href="#contact">info@example.com</a> · +7 000 000-00-00
+  </div>
+</footer>
+
+<script>
+  // nav background on scroll
+  const nav=document.getElementById('nav');
+  addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+  // staggered reveal
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{if(e.isIntersecting){
+      setTimeout(()=>e.target.classList.add('in'),i*90);
+      io.unobserve(e.target);
+    }});
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>
+'@
+
+[System.IO.File]::WriteAllText((Join-Path $Dest "index.html"), $html, $utf8)
+
+Write-Host "Готово! Сайт создан в папке: $Dest"
+Write-Host "Откройте файл index.html в браузере."
