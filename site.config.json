@@ -1,8 +1,8 @@
 {
   "_comment": "Реальные данные сайта. Отредактируйте значения и запустите: python build.py",
 
-  "brand_title": "Вина Болгарии",
-  "brand_html": "Вина <span>Болгарии</span>",
+  "brand_title": "КВИС ТРЕЙД",
+  "brand_html": "КВИС <span>ТРЕЙД</span>",
 
   "email": "info@example.com",
   "phone_display": "+7 000 000-00-00",
