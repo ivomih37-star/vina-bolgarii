@@ -1,0 +1,6 @@
+Сюда положите PDF-каталоги производителей и пропишите пути в site.config.json:
+  - katarzyna_catalog_url     → ассортимент Katarzyna Estate
+  - blacksea_catalog_url      → ассортимент Black Sea Gold
+  - sis_catalog_url           → ассортимент SIS Industries
+
+Пример пути в конфиге: "assets/catalogs/katarzyna-2025.pdf"

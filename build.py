@@ -37,6 +37,44 @@ def img_tag(css_class: str, src: str, alt: str) -> str:
     )
 
 
+DOWNLOAD_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    '<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>'
+    '<polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>'
+    '</svg>'
+)
+MAIL_ICON = (
+    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" '
+    'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'
+    '<rect x="3" y="5" width="18" height="14" rx="2"/>'
+    '<polyline points="3 7 12 13 21 7"/>'
+    '</svg>'
+)
+
+
+def catalog_button(url: str, producer_label: str, email: str) -> str:
+    """
+    Кнопка для каталога: скачивание PDF, либо письмо-запрос с темой,
+    если файл ещё не загружен.
+    """
+    if url.strip():
+        return (
+            f'<a class="cat-btn" href="{html.escape(url, quote=True)}" '
+            f'target="_blank" rel="noopener" download>'
+            f'{DOWNLOAD_ICON}Скачать каталог PDF</a>'
+        )
+    subject = f"Запрос каталога: {producer_label}"
+    mailto = (
+        f"mailto:{html.escape(email, quote=True)}"
+        f"?subject={html.escape(subject, quote=True)}"
+    )
+    return (
+        f'<a class="cat-btn outline" href="{mailto}">'
+        f'{MAIL_ICON}Запросить по почте</a>'
+    )
+
+
 def replace_visual(template: str, marker: str, css_class: str,
                    photo: str, alt: str, warnings: list) -> str:
     """
@@ -95,6 +133,20 @@ def main() -> int:
     }
     for key, value in replacements.items():
         template = template.replace(key, value)
+
+    # Кнопки каталогов: PDF-ссылка или mailto-фолбэк.
+    email = cfg.get("email", "")
+    catalogs = (
+        ("{{CATALOG_KATARZYNA}}", cfg.get("katarzyna_catalog_url", ""), "Katarzyna Estate"),
+        ("{{CATALOG_BLACKSEA}}",  cfg.get("blacksea_catalog_url", ""),  "Black Sea Gold"),
+        ("{{CATALOG_SIS}}",       cfg.get("sis_catalog_url", ""),       "SIS Industries"),
+    )
+    for placeholder, url, label in catalogs:
+        if url.strip() and not (ROOT / url).exists() and not url.startswith(("http://", "https://")):
+            warnings.append(
+                f"каталог '{url}' ({label}) не найден на диске — путь оставлен в HTML"
+            )
+        template = template.replace(placeholder, catalog_button(url, label, email))
 
     # Визуальные блоки: фото или CSS-графика.
     template = replace_visual(

@@ -12,5 +12,10 @@
   "hero_photo": "",
   "hero_photo_alt": "Бутылка вина Katarzyna Estate",
   "gastro_photo": "",
-  "gastro_photo_alt": "Бокал красного вина"
+  "gastro_photo_alt": "Бокал красного вина",
+
+  "_catalogs_comment": "PDF-каталоги производителей. Положите файлы в assets/catalogs/ и впишите пути. Пустое значение — кнопка превратится в 'Запросить по почте'.",
+  "katarzyna_catalog_url": "",
+  "blacksea_catalog_url": "",
+  "sis_catalog_url": ""
 }
