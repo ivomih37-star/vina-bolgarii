@@ -155,6 +155,86 @@
   .center h2{font-size:clamp(2rem,4vw,3.2rem);color:var(--wine);margin:1.1rem 0}
   .center p{color:var(--ink-soft);font-size:1.05rem;line-height:1.75;font-weight:300}
 
+  /* ---------- MANIFESTO ---------- */
+  .manifesto{
+    background:radial-gradient(120% 100% at 50% 0%,#5c1a2b 0%,var(--wine-deep) 70%);
+    color:var(--cream);position:relative;overflow:hidden;text-align:center;
+  }
+  .manifesto::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:
+      radial-gradient(50% 40% at 15% 20%, rgba(200,162,74,.18), transparent 70%),
+      radial-gradient(50% 40% at 85% 80%, rgba(185,84,45,.12), transparent 70%);
+  }
+  .manifesto-inner{position:relative;z-index:1;max-width:920px;margin:0 auto}
+  .manifesto .eyebrow{color:var(--gold-soft);display:block;margin-bottom:1.6rem}
+  .manifesto h2{
+    font-size:clamp(2.4rem,5.8vw,4.6rem);color:var(--cream);
+    line-height:1.05;letter-spacing:-.01em;margin-bottom:1.2rem;
+  }
+  .manifesto h2 em{font-style:italic;color:var(--gold)}
+  .manifesto .lede{
+    font-family:'Prata',serif;font-size:clamp(1.15rem,1.6vw,1.45rem);
+    color:var(--gold-soft);max-width:640px;margin:0 auto 2.2rem;line-height:1.5;
+  }
+  .manifesto .body{
+    color:rgba(243,233,216,.78);max-width:640px;margin:0 auto;
+    font-size:1.05rem;line-height:1.8;font-weight:300;
+  }
+  .manifesto-divider{
+    width:60px;height:1px;background:var(--gold);
+    margin:2.4rem auto;opacity:.7;
+  }
+  .manifesto-quote{
+    font-family:'Prata',serif;font-style:italic;
+    color:var(--gold-soft);font-size:1.1rem;letter-spacing:.01em;
+  }
+
+  /* ---------- POSITIONING ---------- */
+  .positioning{background:var(--paper)}
+  .positioning .center .eyebrow{color:var(--terra)}
+  .segments{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem;
+    margin:3rem auto 0;max-width:980px;
+  }
+  .seg{
+    padding:2rem 1.6rem;border-radius:6px;border:1px solid rgba(42,29,23,.1);
+    background:#fffaf0;text-align:center;position:relative;transition:.4s ease;
+  }
+  .seg .seg-name{
+    font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.25em;
+    font-size:.78rem;color:var(--ink-soft);margin-bottom:1rem;
+  }
+  .seg .seg-bar{
+    height:6px;border-radius:3px;background:rgba(74,19,32,.08);
+    margin-bottom:1rem;overflow:hidden;
+  }
+  .seg .seg-bar i{display:block;height:100%;border-radius:3px}
+  .seg-1 .seg-bar i{width:30%;background:#c9b8a0}
+  .seg-2 .seg-bar i{width:70%;background:linear-gradient(90deg,var(--terra),var(--gold))}
+  .seg-3 .seg-bar i{width:100%;background:linear-gradient(90deg,var(--gold),var(--wine))}
+  .seg p{color:var(--ink-soft);font-size:.92rem;line-height:1.55;font-weight:300}
+  .seg.ours{
+    background:linear-gradient(180deg,#fffaf0,#f1e6d2);
+    border-color:var(--gold);box-shadow:0 20px 40px rgba(74,19,32,.14);
+    transform:translateY(-8px);
+  }
+  .seg.ours .seg-name{color:var(--wine)}
+  .seg.ours::before{
+    content:"наша территория";position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+    background:var(--wine);color:var(--gold);font-family:'Forum',serif;
+    font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;
+    padding:.35rem .9rem;border-radius:30px;white-space:nowrap;
+  }
+  .pos-text{
+    max-width:680px;margin:3rem auto 0;text-align:center;
+    color:var(--ink-soft);font-size:1rem;line-height:1.75;font-weight:300;
+  }
+  @media(max-width:860px){
+    .segments{grid-template-columns:1fr}
+    .seg.ours{transform:none}
+  }
+
   /* ---------- PRODUCERS ---------- */
   .producers{background:var(--paper)}
   .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
@@ -286,6 +366,7 @@
 <nav id="nav">
   <div class="brand">{{BRAND_HTML}}</div>
   <div class="nav-links">
+    <a href="#manifesto">Философия</a>
     <a href="#producers">Винодельни</a>
     <a href="#gastro">Гастрономия</a>
     <a href="#process">Сотрудничество</a>
@@ -297,9 +378,9 @@
 <header class="hero">
   <div class="hero-grid">
     <div class="hero-text">
-      <div class="eyebrow">Болгария · Импорт вин и крепких напитков</div>
+      <div class="eyebrow">Болгария · Гастрономическая дипломатия</div>
       <h1>Солнце Фракии <em>в каждом</em> бокале</h1>
-      <p>Эксклюзивное представительство болгарских винодельческих домов на российском рынке. Вина и крепкие напитки с защищённым происхождением — напрямую от производителя.</p>
+      <p>Эксклюзивное представительство болгарских винодельческих домов на российском рынке. Премиум и медиум-плюс — вина и крепкие напитки с защищённым происхождением, напрямую от производителя.</p>
       <div class="hero-actions">
         <a href="#producers" class="btn btn-gold">Наши винодельни</a>
         <a href="#contact" class="btn btn-ghost">Стать партнёром</a>
@@ -330,6 +411,18 @@
   <div><div class="num">PDO</div><div class="lbl">защищённое происхождение</div></div>
   <div><div class="num">Москва</div><div class="lbl">доставка по РФ</div></div>
 </div>
+
+<!-- MANIFESTO -->
+<section class="manifesto" id="manifesto">
+  <div class="manifesto-inner reveal">
+    <span class="eyebrow">Наша философия</span>
+    <h2>Торговля <em>вместо</em> войны</h2>
+    <p class="lede">Гастрономическая дипломатия и объединение через качественный продукт.</p>
+    <p class="body">Мы верим, что хороший бокал делает то, чего не делают границы и заголовки: усаживает людей за один стол. Вино и крепкие напитки — это разговор культур, который ведётся медленно, спокойно и по-настоящему. Болгария умеет такой разговор — мы помогаем ему случиться в России.</p>
+    <div class="manifesto-divider"></div>
+    <p class="manifesto-quote">«Там, где есть стол с хорошим вином, нет места конфликту.»</p>
+  </div>
+</section>
 
 <!-- PRODUCERS -->
 <section class="producers" id="producers">
@@ -367,6 +460,33 @@
       </div>
     </div>
   </div>
+</section>
+
+<!-- POSITIONING -->
+<section class="positioning" id="positioning">
+  <div class="center reveal">
+    <div class="eyebrow">Позиционирование</div>
+    <h2>Не дёшево — а правильно</h2>
+    <p>Долгие годы болгарское вино было в России синонимом «бюджетного». Мы выводим его туда, где ему место — в медиум-плюс и премиум-сегмент, рядом с винами с защищённым происхождением и серьёзной винодельческой школой.</p>
+  </div>
+  <div class="segments">
+    <div class="seg seg-1 reveal">
+      <div class="seg-name">Базовый</div>
+      <div class="seg-bar"><i></i></div>
+      <p>Массовый сегмент, ценовая конкуренция, безликий продукт. Не наша история.</p>
+    </div>
+    <div class="seg seg-2 ours reveal">
+      <div class="seg-name">Медиум-плюс</div>
+      <div class="seg-bar"><i></i></div>
+      <p>Терруарные вина, ароматные мускаты, выдержанные дистилляты — на полке винотеки и в винной карте ресторана.</p>
+    </div>
+    <div class="seg seg-3 ours reveal">
+      <div class="seg-name">Премиум</div>
+      <div class="seg-bar"><i></i></div>
+      <p>Резервы Katarzyna Estate и коллекционные позиции — для гастрономических ресторанов и ценителей.</p>
+    </div>
+  </div>
+  <p class="pos-text reveal">PDO, награды международных конкурсов, прозрачное происхождение и работа напрямую с винодельнями — то, на чём держится наше предложение.</p>
 </section>
 
 <!-- GASTRO -->
