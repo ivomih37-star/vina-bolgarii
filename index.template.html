@@ -7,6 +7,15 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Forum&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+  // Сразу прячем сайт, если возраст ещё не подтверждён —
+  // иначе на долю секунды успеет мелькнуть содержимое до показа плашки.
+  try {
+    if (localStorage.getItem('ageConfirmed') !== 'yes') {
+      document.documentElement.classList.add('age-locked');
+    }
+  } catch (e) { document.documentElement.classList.add('age-locked'); }
+</script>
 <style>
   :root{
     --wine:#4a1320;
@@ -100,7 +109,7 @@
   }
   .btn-gold{background:var(--gold);color:var(--wine-deep)}
   .btn-gold:hover{background:var(--gold-soft);transform:translateY(-2px);box-shadow:0 12px 28px rgba(200,162,74,.3)}
-  .btn-ghost{border-color:rgba(243,233,216,.4);color:var(--cream)}
+  .btn-ghost{background:transparent;border-color:rgba(243,233,216,.4);color:var(--cream);font-family:'Manrope',sans-serif}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold-soft)}
 
   /* CSS bottle */
@@ -212,9 +221,67 @@
     display:flex;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;font-size:.85rem;font-weight:300}
   footer .brand{font-size:1.1rem}
   footer a{color:var(--gold-soft);text-decoration:none}
+
+  /* ---------- AGE GATE 18+ ---------- */
+  /* Пока возраст не подтверждён — прячем основное содержимое и скролл. */
+  html.age-locked{overflow:hidden}
+  html.age-locked body > nav,
+  html.age-locked body > header,
+  html.age-locked body > .strip,
+  html.age-locked body > section,
+  html.age-locked body > footer{visibility:hidden}
+  .age-gate{
+    position:fixed;inset:0;z-index:10000;display:none;
+    align-items:center;justify-content:center;padding:2rem;
+    background:radial-gradient(120% 100% at 50% 0%,#6a1d2c,#2e0c15);
+  }
+  .age-gate.show{display:flex}
+  .age-card{
+    max-width:520px;width:100%;text-align:center;color:var(--cream);
+    padding:3rem 2.4rem;border:1px solid rgba(200,162,74,.35);border-radius:6px;
+    background:rgba(20,6,10,.55);backdrop-filter:blur(6px);
+    box-shadow:0 30px 80px rgba(0,0,0,.5);
+  }
+  .age-mark{
+    font-family:'Prata',serif;font-size:3.4rem;color:var(--gold);
+    width:110px;height:110px;border:2px solid var(--gold);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 1.6rem;
+  }
+  .age-card h2{font-family:'Prata',serif;font-size:1.9rem;color:var(--cream);margin-bottom:1rem}
+  .age-card p{color:rgba(243,233,216,.78);line-height:1.6;font-weight:300;font-size:.98rem;margin-bottom:2rem}
+  .age-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .age-card .age-note{font-size:.78rem;color:rgba(243,233,216,.5);margin-top:1.6rem;line-height:1.5}
+  .age-deny{
+    display:none;text-align:center;color:var(--cream);
+    min-height:100vh;flex-direction:column;align-items:center;justify-content:center;
+    padding:2rem;background:var(--wine-deep);
+  }
+  .age-deny.show{display:flex}
+  .age-deny h2{font-family:'Prata',serif;font-size:2.2rem;color:var(--gold);margin-bottom:1rem}
+  .age-deny p{color:rgba(243,233,216,.7);max-width:420px;line-height:1.6;font-weight:300}
 </style>
 </head>
 <body>
+
+<!-- AGE GATE 18+ -->
+<div class="age-gate" id="ageGate" role="dialog" aria-modal="true" aria-labelledby="ageTitle">
+  <div class="age-card">
+    <div class="age-mark">18+</div>
+    <h2 id="ageTitle">Вам исполнилось 18 лет?</h2>
+    <p>Сайт содержит информацию об алкогольной продукции и предназначен только для совершеннолетних. Подтвердите свой возраст, чтобы продолжить.</p>
+    <div class="age-actions">
+      <button type="button" class="btn btn-gold" id="ageYes">Мне есть 18 лет</button>
+      <button type="button" class="btn btn-ghost" id="ageNo">Нет, мне меньше 18</button>
+    </div>
+    <div class="age-note">Чрезмерное употребление алкоголя вредит вашему здоровью.</div>
+  </div>
+</div>
+
+<!-- AGE DENY (для тех, кто моложе 18) -->
+<div class="age-deny" id="ageDeny">
+  <h2>Доступ ограничен</h2>
+  <p>Сайт закрыт для посетителей младше 18 лет. Возвращайтесь, когда вам исполнится 18.</p>
+</div>
 
 <nav id="nav">
   <div class="brand">{{BRAND_HTML}}</div>
@@ -375,6 +442,33 @@
 </footer>
 
 <script>
+  // age gate 18+
+  (function(){
+    const gate=document.getElementById('ageGate');
+    const deny=document.getElementById('ageDeny');
+    let stored=null;
+    try{ stored=localStorage.getItem('ageConfirmed'); }catch(e){}
+    if(stored==='yes'){
+      document.documentElement.classList.remove('age-locked');
+    } else if(stored==='no'){
+      // оставляем age-locked, чтобы сайт под заглушкой был скрыт
+      deny.classList.add('show');
+    } else {
+      gate.classList.add('show');
+    }
+    document.getElementById('ageYes').addEventListener('click',()=>{
+      try{ localStorage.setItem('ageConfirmed','yes'); }catch(e){}
+      gate.classList.remove('show');
+      document.documentElement.classList.remove('age-locked');
+    });
+    document.getElementById('ageNo').addEventListener('click',()=>{
+      try{ localStorage.setItem('ageConfirmed','no'); }catch(e){}
+      gate.classList.remove('show');
+      // age-locked не снимаем — сайт под заглушкой должен оставаться скрытым
+      deny.classList.add('show');
+    });
+  })();
+
   // nav background on scroll
   const nav=document.getElementById('nav');
   addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
