@@ -1,0 +1,16 @@
+{
+  "_comment": "Реальные данные сайта. Отредактируйте значения и запустите: python build.py",
+
+  "brand_title": "Вина Болгарии",
+  "brand_html": "Вина <span>Болгарии</span>",
+
+  "email": "info@example.com",
+  "phone_display": "+7 000 000-00-00",
+  "phone_tel": "+70000000000",
+
+  "_photos_comment": "Путь к фото относительно index.html, например assets/photos/bottle.jpg. Оставьте пустым, чтобы сохранить нарисованную графику.",
+  "hero_photo": "",
+  "hero_photo_alt": "Бутылка вина Katarzyna Estate",
+  "gastro_photo": "",
+  "gastro_photo_alt": "Бокал красного вина"
+}

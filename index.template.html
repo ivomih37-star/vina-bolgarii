@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Вина Болгарии — Katarzyna Estate · Black Sea Gold · SIS Industries</title>
+<title>{{BRAND_TITLE}} — Katarzyna Estate · Black Sea Gold · SIS Industries</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Forum&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -217,7 +217,7 @@
 <body>
 
 <nav id="nav">
-  <div class="brand">Вина <span>Болгарии</span></div>
+  <div class="brand">{{BRAND_HTML}}</div>
   <div class="nav-links">
     <a href="#producers">Винодельни</a>
     <a href="#gastro">Гастрономия</a>
@@ -239,6 +239,7 @@
       </div>
     </div>
     <div class="bottle-wrap">
+      <!--HERO_VISUAL-->
       <div class="bottle">
         <div class="neck"></div>
         <div class="body"></div>
@@ -250,6 +251,7 @@
           <div class="ln">Reserve<br>2021</div>
         </div>
       </div>
+      <!--/HERO_VISUAL-->
     </div>
   </div>
 </header>
@@ -313,11 +315,13 @@
     </div>
   </div>
   <div class="gastro-visual reveal">
+    <!--GASTRO_VISUAL-->
     <div class="glass">
       <div class="bowl"><div class="liquid"></div></div>
       <div class="stem"></div>
       <div class="base"></div>
     </div>
+    <!--/GASTRO_VISUAL-->
   </div>
 </section>
 
@@ -353,20 +357,20 @@
     <h2>Запросите презентацию<br>и прайс-лист</h2>
     <p>Пришлём каталог болгарских вин и крепких напитков на русском языке, актуальные цены и условия доставки в вашем городе.</p>
     <div class="hero-actions" style="justify-content:center">
-      <a href="mailto:info@example.com" class="btn btn-gold">Написать на почту</a>
-      <a href="tel:+70000000000" class="btn btn-ghost">Позвонить</a>
+      <a href="mailto:{{EMAIL}}" class="btn btn-gold">Написать на почту</a>
+      <a href="tel:{{PHONE_TEL}}" class="btn btn-ghost">Позвонить</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div>
-    <div class="brand">Вина <span>Болгарии</span></div>
+    <div class="brand">{{BRAND_HTML}}</div>
     <div style="margin-top:.6rem">Официальный представитель болгарских производителей в РФ</div>
   </div>
   <div>
     Katarzyna Estate · Black Sea Gold · SIS Industries<br>
-    <a href="mailto:info@example.com">info@example.com</a> · +7 000 000-00-00
+    <a href="mailto:{{EMAIL}}">{{EMAIL}}</a> · {{PHONE_DISPLAY}}
   </div>
 </footer>
 
