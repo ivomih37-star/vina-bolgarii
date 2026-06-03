@@ -59,8 +59,19 @@
     background:rgba(46,12,21,.92);backdrop-filter:blur(10px);
     padding:1rem 6vw;box-shadow:0 8px 30px rgba(0,0,0,.25);
   }
-  .brand{font-family:'Prata',serif;font-size:1.35rem;color:var(--cream);letter-spacing:.02em}
+  .brand{font-family:'Prata',serif;font-size:1.35rem;color:var(--cream);letter-spacing:.02em;
+    display:flex;align-items:center;line-height:0}
   .brand span{color:var(--gold)}
+  .brand-logo{display:block;height:46px;width:auto;
+    transition:height .3s ease, filter .3s ease;
+    filter:drop-shadow(0 2px 10px rgba(0,0,0,.35))}
+  nav.scrolled .brand-logo{height:40px;filter:none}
+  footer .brand-logo{height:84px;filter:none}
+  @media(max-width:860px){
+    .brand-logo{height:38px}
+    nav.scrolled .brand-logo{height:34px}
+    footer .brand-logo{height:64px}
+  }
   .nav-links{display:flex;gap:2.4rem;align-items:center}
   .nav-links a{
     color:var(--cream);text-decoration:none;font-size:.85rem;letter-spacing:.05em;
@@ -458,7 +469,7 @@
 </div>
 
 <nav id="nav">
-  <div class="brand">КВИС <span>ТРЕЙД</span></div>
+  <div class="brand"><img class="brand-logo" src="assets/logo/kvis-trade.png" alt="КВИС ТРЕЙД"></div>
   <div class="nav-links">
     <a href="#manifesto">Философия</a>
     <a href="#producers">Винодельни</a>
@@ -702,7 +713,7 @@
 
 <footer>
   <div>
-    <div class="brand">КВИС <span>ТРЕЙД</span></div>
+    <div class="brand"><img class="brand-logo" src="assets/logo/kvis-trade.png" alt="КВИС ТРЕЙД"></div>
     <div style="margin-top:.6rem">Официальный представитель болгарских производителей в РФ</div>
   </div>
   <div>
