@@ -2,7 +2,7 @@
   "_comment": "Реальные данные сайта. Отредактируйте значения и запустите: python build.py",
 
   "brand_title": "КВИС ТРЕЙД",
-  "brand_html": "<img class=\"brand-logo\" src=\"assets/logo/kvis-trade.png\" alt=\"КВИС ТРЕЙД\">",
+  "brand_html": "<img class=\"brand-logo\" src=\"assets/logo/kvis-trade-gold.png\" alt=\"КВИС ТРЕЙД\">",
 
   "email": "kvistrade@gmail.com",
   "phone_display": "+7 916 243-23-96",
