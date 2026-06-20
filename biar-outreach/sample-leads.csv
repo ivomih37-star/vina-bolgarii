@@ -1,0 +1,6 @@
+name,type,city,segment,has_wine_list,contact_name,email,phone,notes
+Probka Wine Bar,wine_bar,Москва,premium,yes,,,,широкая карта есть импорт Италии
+Траттория Сезон,restaurant,Москва,mid,short,,,,итальянская кухня сеть из 3 точек
+Винотека на Рубинштейна,wine_shop,Санкт-Петербург,premium,yes,Анна,,,нишевый импорт
+Бар Дистилляр,bar,Сочи,mid,no,,,,коктейльная карта интерес к крепкому
+ВинОпт Юг,distributor,Краснодар,mid,no,,,,опт HoReCa по ЮФО
