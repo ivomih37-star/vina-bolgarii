@@ -26,9 +26,9 @@
 
 | Производитель | Профиль продукта | Целевые импортёры (P1→P2) |
 |---|---|---|
-| **Katarzyna Estate** | премиальные красные долины Фракии (Cabernet, Merlot, Syrah, дуб) | Simple, Fort, MBG, ВайнДом, AST, ВиноТерра, Alianta → Luding (премиум), Ladoga |
-| **Black Sea Gold** | **Бургас-63 (гроздовый бренди) + бренди**, белые/мускат | Ladoga, Luding → Beluga/Novabev, Триалко, AST, Alianta |
-| **SIS Industries** | бренди, ракия, дистилляты | Beluga/Novabev, Luding → Ladoga, Триалко, AST, Alianta |
+| **Katarzyna Estate** | премиальные красные долины Фракии (Cabernet, Merlot, Syrah, дуб) | Simple, Fort, MBG, ВайнДом, AST, ВиноТерра → Luding (премиум), Ladoga |
+| **Black Sea Gold** | **Бургас-63 (гроздовый бренди) + бренди**, белые/мускат | Ladoga, Luding → Beluga/Novabev, Триалко, AST |
+| **SIS Industries** | бренди, ракия, дистилляты | Beluga/Novabev, Luding → Ladoga, Триалко, AST |
 
 Логика: премиальное тихое вино → импортёры с премиальным still-портфелем;
 бренди/Бургас-63 и крепкое → импортёры, сильные в бренди и крепком.
