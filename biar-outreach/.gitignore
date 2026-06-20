@@ -1,0 +1,12 @@
+# Секреты
+.env
+
+# Сгенерированные артефакты (кроме служебных)
+outputs/*
+!outputs/.gitkeep
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/

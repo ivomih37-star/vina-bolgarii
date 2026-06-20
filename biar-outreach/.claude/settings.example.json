@@ -1,0 +1,25 @@
+{
+  "//": "ПРИМЕР настроек для аутрич-пайплайна. Чтобы активировать — скопируйте в",
+  "//activate": ".claude/settings.json ВРУЧНУЮ (осознанно), затем при желании раскомментируйте hooks.",
+  "//model": "Модель можно зафиксировать при необходимости, напр. claude-opus-4-8.",
+  "permissions": {
+    "deny": [
+      "Read(./.env)"
+    ]
+  },
+  "enabledMcpjsonServers": [],
+  "//hooks": "Раскомментируйте блок ниже (перенесите в 'hooks'), чтобы логировать вызовы в outputs/pipeline-log:",
+  "hooks_disabled_example": {
+    "PostToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/PostToolUse.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
