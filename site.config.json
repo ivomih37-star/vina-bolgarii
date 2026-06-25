@@ -12,8 +12,11 @@
   "legal_name": "«КВИС ТРЕЙД» ЕООД",
   "legal_country": "BG",
   "eik": "207595321",
-  "vat": "",
-  "legal_address": "",
+  "vat": "BG207595321",
+  "legal_address": "ул. „Бистришко шосе“ № 18, ж.к. Симеоново",
+  "legal_locality": "София",
+  "legal_region": "р-н Витоша",
+  "legal_postal_code": "1756",
   "founded_year": "",
 
   "_social_comment": "Полные URL аккаунтов в соцсетях. Пустое поле — иконка не показывается.",

@@ -138,6 +138,12 @@ def build_json_ld(cfg: dict) -> str:
     address_dict = {"@type": "PostalAddress", "addressCountry": legal_country}
     if cfg.get("legal_address"):
         address_dict["streetAddress"] = cfg["legal_address"]
+    if cfg.get("legal_locality"):
+        address_dict["addressLocality"] = cfg["legal_locality"]
+    if cfg.get("legal_region"):
+        address_dict["addressRegion"] = cfg["legal_region"]
+    if cfg.get("legal_postal_code"):
+        address_dict["postalCode"] = cfg["legal_postal_code"]
 
     org = {
         "@context": "https://schema.org",
@@ -209,8 +215,15 @@ def build_legal_block(cfg: dict) -> str:
         rows.append("ЕИК: " + html.escape(cfg["eik"]))
     if cfg.get("vat", "").strip():
         rows.append("ДДС: " + html.escape(cfg["vat"]))
+    address_parts = []
+    locality = cfg.get("legal_locality", "").strip()
+    postal_code = cfg.get("legal_postal_code", "").strip()
+    if locality or postal_code:
+        address_parts.append("гр. " + " ".join(p for p in (locality, postal_code) if p))
     if cfg.get("legal_address", "").strip():
-        rows.append(html.escape(cfg["legal_address"]))
+        address_parts.append(cfg["legal_address"].strip())
+    if address_parts:
+        rows.append(html.escape(", ".join(address_parts)))
     if not rows:
         return ""
     return '<div class="footer-legal">' + " · ".join(rows) + "</div>"
