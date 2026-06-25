@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Использование cookies — {{BRAND_TITLE}}</title>
+<meta name="description" content="На сайте {{SITE_URL}} используется только техническая запись localStorage для возрастного экрана 18+. Аналитика и реклама не установлены.">
+<meta name="theme-color" content="#4a1320">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="{{SITE_URL}}/cookie.html">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/logo/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+{{VERIFICATION_META}}
+{{JSON_LD}}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prata&family=Forum&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --wine:#4a1320;--wine-deep:#3a0e18;--terra:#b9542d;--gold:#c8a24a;
+  --gold-soft:#d8b96b;--cream:#f6efe2;--ink:#2a1318;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--cream);color:var(--ink);font-family:'Manrope',sans-serif;font-weight:300;line-height:1.7}
+a{color:var(--wine);text-decoration:underline;text-decoration-color:rgba(74,19,32,.3);text-underline-offset:3px}
+a:hover{color:var(--terra)}
+nav.legal-nav{background:rgba(46,12,21,.92);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 6vw;position:sticky;top:0;z-index:100;
+  box-shadow:0 8px 30px rgba(0,0,0,.25)}
+nav.legal-nav .brand-logo{height:40px;width:auto}
+nav.legal-nav a.back{color:var(--cream);text-decoration:none;font-family:'Forum',serif;
+  letter-spacing:.18em;text-transform:uppercase;font-size:.78rem;border:1px solid rgba(243,233,216,.35);
+  padding:.6rem 1.2rem;border-radius:2px;transition:.25s}
+nav.legal-nav a.back:hover{border-color:var(--gold);color:var(--gold-soft)}
+main{max-width:780px;margin:0 auto;padding:4rem 6vw 5rem}
+main h1{font-family:'Prata',serif;font-size:clamp(2rem,4.5vw,2.8rem);line-height:1.15;
+  color:var(--wine);margin-bottom:.7rem;letter-spacing:-.01em}
+main .lede{font-size:1.05rem;color:rgba(42,19,24,.7);margin-bottom:2.5rem;line-height:1.6}
+main h2{font-family:'Prata',serif;font-size:1.4rem;color:var(--wine);margin:2.4rem 0 .8rem;font-weight:400}
+main p{margin-bottom:1rem}
+main ul,main ol{margin:.8rem 0 1.2rem 1.4rem}
+main li{margin-bottom:.4rem}
+main .meta{font-family:'Forum',serif;letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;
+  color:var(--terra);margin-bottom:.6rem}
+main .contact-box{background:rgba(74,19,32,.04);border-left:3px solid var(--gold);
+  padding:1.2rem 1.4rem;margin:2rem 0;font-size:.95rem;line-height:1.6}
+main .contact-box strong{color:var(--wine);font-weight:500}
+footer{background:var(--wine-deep);color:rgba(243,233,216,.6);padding:3rem 6vw 1.8rem;
+  font-size:.85rem;font-weight:300}
+.footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:2.5rem 3rem;align-items:start;max-width:1400px;margin:0 auto}
+footer a{color:var(--gold-soft);text-decoration:none;border:none}
+footer a:hover{opacity:.8}
+.brand-logo{display:block;height:84px;width:auto}
+.footer-col h4{font-family:'Forum',serif;letter-spacing:.18em;text-transform:uppercase;
+  font-size:.72rem;color:var(--gold);margin-bottom:.9rem;font-weight:400}
+.footer-tag{margin-top:.6rem;line-height:1.55}
+.footer-partners a{display:block;margin-bottom:.35rem;color:rgba(243,233,216,.78)}
+.footer-partners a span{color:var(--gold-soft);font-family:'Forum',serif;font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;margin-left:.4rem;opacity:.6}
+.footer-legal{margin-top:.6rem;line-height:1.6;font-size:.78rem;color:rgba(243,233,216,.55)}
+.footer-social{display:flex;gap:.7rem;margin-top:1.1rem}
+.social-link{width:34px;height:34px;border:1px solid rgba(200,162,74,.35);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;color:var(--gold-soft);transition:.25s}
+.social-link:hover{background:var(--gold);color:var(--wine-deep);border-color:var(--gold)}
+.social-link svg{width:14px;height:14px}
+.footer-links{margin-top:.6rem;display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.78rem}
+.footer-disclaimer{margin-top:2rem;padding-top:1.4rem;border-top:1px solid rgba(243,233,216,.08);
+  font-size:.72rem;line-height:1.55;color:rgba(243,233,216,.42);max-width:980px;margin-left:auto;margin-right:auto}
+.footer-bottom{margin-top:1rem;display:flex;justify-content:space-between;flex-wrap:wrap;gap:.6rem;
+  font-size:.72rem;color:rgba(243,233,216,.42);max-width:1400px;margin-left:auto;margin-right:auto}
+@media(max-width:860px){.footer-grid{grid-template-columns:1fr;gap:1.6rem}.brand-logo{height:64px}}
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  {{BRAND_HTML}}
+  <a class="back" href="/">← На главную</a>
+</nav>
+
+<main>
+  <div class="meta">Юридический раздел</div>
+  <h1>Использование файлов cookie</h1>
+  <p class="lede">Сайт <a href="{{SITE_URL}}/">{{SITE_URL}}</a> использует минимальный набор технических хранилищ, необходимых для корректной работы возрастного ограничения. Маркетинговых, рекламных или аналитических трекеров не установлено.</p>
+
+  <h2>Что мы используем</h2>
+  <p>На сайте задействуется ровно одна запись в локальном хранилище браузера (localStorage):</p>
+  <ul>
+    <li><code>ageConfirmed</code> — техническая запись со значением <code>yes</code> или <code>no</code>, фиксирующая ваш ответ на возрастной экран 18+. Запись хранится в вашем браузере, не передаётся на сервер и не используется для идентификации.</li>
+  </ul>
+  <p><strong>HTTP cookies, рекламные пиксели, аналитические скрипты (Google Analytics, Яндекс.Метрика и т.п.) — не установлены.</strong></p>
+
+  <h2>Зачем это нужно</h2>
+  <p>Запись <code>ageConfirmed</code> позволяет не показывать вам экран подтверждения совершеннолетия при каждом повторном заходе на сайт, что соответствует требованиям ст. 16 Федерального закона № 171-ФЗ и облегчает использование ресурса.</p>
+
+  <h2>Как удалить</h2>
+  <p>Запись в localStorage можно удалить в любой момент через настройки браузера:</p>
+  <ul>
+    <li><strong>Chrome / Edge:</strong> Настройки → Конфиденциальность → Файлы cookie и другие данные сайтов → Просмотреть все данные → найти <code>{{SITE_URL}}</code> → удалить.</li>
+    <li><strong>Firefox:</strong> Настройки → Приватность и защита → Куки и данные сайтов → Управление данными → найти домен → удалить.</li>
+    <li><strong>Safari:</strong> Настройки → Конфиденциальность → Управлять данными веб-сайтов.</li>
+  </ul>
+  <p>После удаления при следующем заходе на сайт вам снова будет предложено подтвердить совершеннолетие.</p>
+
+  <h2>Изменения сторонних сервисов</h2>
+  <p>Сайт подгружает шрифты с серверов Google Fonts (<code>fonts.googleapis.com</code>, <code>fonts.gstatic.com</code>). При этом ваш браузер обращается напрямую к этим серверам — мы не контролируем и не получаем данные этих запросов. Подробнее: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">политика Google</a>.</p>
+
+  <h2>Контакты</h2>
+  <div class="contact-box">
+    <p>Вопросы об использовании хранилищ браузера направляйте по адресу:</p>
+    <p style="margin-top:.6rem"><strong>{{LEGAL_NAME}}</strong></p>
+    <p>Email: <a href="mailto:{{EMAIL}}">{{EMAIL}}</a></p>
+  </div>
+
+  <p class="meta" style="margin-top:3rem">Редакция от {{CURRENT_YEAR}} года</p>
+</main>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      {{BRAND_HTML}}
+      <div class="footer-tag">Официальный представитель болгарских винодельческих домов на российском рынке.</div>
+      {{FOOTER_SOCIAL}}
+    </div>
+    <div class="footer-col">
+      <h4>Винодельни</h4>
+      <div class="footer-partners">
+        <a href="https://katarzyna.bg" target="_blank" rel="noopener">Katarzyna Estate <span>katarzyna.bg</span></a>
+        <a href="https://blackseagold.com" target="_blank" rel="noopener">Black Sea Gold <span>blackseagold.com</span></a>
+        <a href="https://sis.bg" target="_blank" rel="noopener">SIS Industries <span>sis.bg</span></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Контакты</h4>
+      <a href="mailto:{{EMAIL}}">{{EMAIL}}</a><br>
+      <a href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a>
+      {{FOOTER_LEGAL}}
+      <div class="footer-links">
+        <a href="/about.html">О компании</a>
+        <a href="/privacy.html">Политика конфиденциальности</a>
+        <a href="/terms.html">Условия</a>
+        <a href="/cookie.html">Cookies</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-disclaimer">
+    Информационный B2B-ресурс. Сайт не осуществляет розничную продажу алкогольной продукции.
+    Поставки осуществляются юридическим лицам, обладающим лицензией на оборот алкогольной продукции
+    в соответствии с Федеральным законом № 171-ФЗ. Чрезмерное употребление алкоголя вредит вашему здоровью.
+  </div>
+  <div class="footer-bottom">
+    <div>© {{CURRENT_YEAR}} {{LEGAL_NAME}}. Все права защищены.</div>
+    <div>Сайт: <a href="{{SITE_URL}}/">{{SITE_URL}}</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

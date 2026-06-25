@@ -8,6 +8,22 @@
   "phone_display": "+7 916 243-23-96",
   "phone_tel": "+79162432396",
 
+  "_legal_comment": "Юридические реквизиты. Используются в подвале сайта и в JSON-LD Schema.org для повышения доверия поисковиков и AI. Заполнить по выписке ЕГРЮЛ.",
+  "legal_name": "ООО «КВИС ТРЕЙД»",
+  "inn": "",
+  "ogrn": "",
+  "legal_address": "",
+  "founded_year": "",
+
+  "_social_comment": "Полные URL аккаунтов в соцсетях. Пустое поле — иконка не показывается.",
+  "social_vk": "",
+  "social_telegram": "",
+  "social_linkedin": "",
+
+  "_seo_comment": "Коды подтверждения сайта в кабинетах поисковиков (вебмастер). Получаются в Яндекс.Вебмастер и Google Search Console.",
+  "yandex_verification": "",
+  "google_verification": "",
+
   "_photos_comment": "Путь к фото относительно index.html, например assets/photos/bottle.jpg. Оставьте пустым, чтобы сохранить нарисованную графику.",
   "hero_photo": "",
   "hero_photo_alt": "Бутылка вина Katarzyna Estate",
