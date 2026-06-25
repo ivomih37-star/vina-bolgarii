@@ -134,7 +134,8 @@ def replace_visual(template: str, marker: str, css_class: str,
 def build_json_ld(cfg: dict) -> str:
     """JSON-LD Schema.org Organization + WebSite — основной trust-сигнал
     для Google AI Overview, Яндекс Нейро и Knowledge Graph."""
-    address_dict = {"@type": "PostalAddress", "addressCountry": "RU"}
+    legal_country = cfg.get("legal_country", "BG").strip() or "BG"
+    address_dict = {"@type": "PostalAddress", "addressCountry": legal_country}
     if cfg.get("legal_address"):
         address_dict["streetAddress"] = cfg["legal_address"]
 
@@ -143,12 +144,16 @@ def build_json_ld(cfg: dict) -> str:
         "@type": "Organization",
         "@id": f"{SITE_URL}/#org",
         "name": cfg.get("brand_title", "КВИС ТРЕЙД"),
-        "legalName": cfg.get("legal_name", "ООО «КВИС ТРЕЙД»"),
+        "legalName": cfg.get("legal_name", "«КВИС ТРЕЙД» ЕООД"),
         "url": SITE_URL,
         "logo": f"{SITE_URL}/assets/logo/favicon-512.png",
         "email": cfg.get("email", ""),
         "telephone": cfg.get("phone_display", ""),
         "address": address_dict,
+        "foundingLocation": {
+            "@type": "Country",
+            "name": "Болгария" if legal_country == "BG" else legal_country,
+        },
         "areaServed": {"@type": "Country", "name": "Россия"},
         "description": (
             "Эксклюзивное представительство болгарских винодельческих "
@@ -167,10 +172,15 @@ def build_json_ld(cfg: dict) -> str:
             ) if url.strip()
         ],
     }
-    if cfg.get("inn"):
-        org["taxID"] = cfg["inn"]
-    if cfg.get("ogrn"):
-        org["vatID"] = cfg["ogrn"]
+    if cfg.get("eik"):
+        org["taxID"] = cfg["eik"]
+        org["identifier"] = {
+            "@type": "PropertyValue",
+            "propertyID": "EIK",
+            "value": cfg["eik"],
+        }
+    if cfg.get("vat"):
+        org["vatID"] = cfg["vat"]
     if cfg.get("founded_year"):
         org["foundingDate"] = cfg["founded_year"]
 
@@ -195,10 +205,10 @@ def build_legal_block(cfg: dict) -> str:
     legal_name = cfg.get("legal_name", "").strip()
     if legal_name:
         rows.append(html.escape(legal_name))
-    if cfg.get("inn", "").strip():
-        rows.append("ИНН: " + html.escape(cfg["inn"]))
-    if cfg.get("ogrn", "").strip():
-        rows.append("ОГРН: " + html.escape(cfg["ogrn"]))
+    if cfg.get("eik", "").strip():
+        rows.append("ЕИК: " + html.escape(cfg["eik"]))
+    if cfg.get("vat", "").strip():
+        rows.append("ДДС: " + html.escape(cfg["vat"]))
     if cfg.get("legal_address", "").strip():
         rows.append(html.escape(cfg["legal_address"]))
     if not rows:
@@ -252,7 +262,7 @@ def apply_replacements(template: str, cfg: dict, current_year: str,
         "{{EMAIL}}": html.escape(cfg.get("email", ""), quote=True),
         "{{PHONE_DISPLAY}}": html.escape(cfg.get("phone_display", "")),
         "{{PHONE_TEL}}": html.escape(cfg.get("phone_tel", ""), quote=True),
-        "{{LEGAL_NAME}}": html.escape(cfg.get("legal_name", "ООО «КВИС ТРЕЙД»")),
+        "{{LEGAL_NAME}}": html.escape(cfg.get("legal_name", "«КВИС ТРЕЙД» ЕООД")),
         "{{CURRENT_YEAR}}": current_year,
         "{{SITE_URL}}": SITE_URL,
         "{{JSON_LD}}": json_ld,
