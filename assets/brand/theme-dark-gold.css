@@ -1,0 +1,128 @@
+/*
+ * KVIS TRADE — dark+gold тема для лендинга.
+ *
+ * Готовый к подключению набор CSS-переменных, повторяющий стиль
+ * презентации Premium Gateway (см. assets/brand/style-guide.md).
+ *
+ * Применение: скопировать содержимое блока :root в index.template.html
+ * (заменив текущий блок переменных) и пересобрать `python3 build.py`.
+ * Шрифт Cormorant SC подключить тегом <link> рядом с уже подключёнными.
+ */
+
+:root {
+  /* Палитра */
+  --bg: #0a0a0a;              /* фон страницы — угольный чёрный */
+  --bg-elev: #15151a;         /* плашки, карточки, рамки */
+  --bg-elev-2: #1f1f24;       /* приподнятые секции (hover, modal) */
+
+  --gold: #c8a24a;            /* базовое золото (логотип, рамки) */
+  --gold-light: #e9d199;      /* свет / hover / gradient highlight */
+  --gold-dark: #8a6a2b;       /* тень / gradient bottom */
+
+  --text: #f3e9d8;            /* основной текст — кремово-белый */
+  --text-muted: rgba(243, 233, 216, 0.65);
+  --text-dim: rgba(243, 233, 216, 0.4);
+
+  --divider: rgba(200, 162, 74, 0.35);
+  --border: rgba(200, 162, 74, 0.5);
+
+  /* Готовый «металлический» градиент для рамок и плашек */
+  --gold-gradient: linear-gradient(
+    135deg,
+    var(--gold-dark) 0%,
+    var(--gold) 35%,
+    var(--gold-light) 50%,
+    var(--gold) 65%,
+    var(--gold-dark) 100%
+  );
+
+  /* Типографика */
+  --font-display: 'Cormorant SC', 'Prata', serif;   /* версальные заголовки */
+  --font-serif: 'Prata', 'Cormorant', serif;        /* подзаголовки */
+  --font-body: 'Manrope', 'Inter', system-ui, sans-serif;
+
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-loose: 0.08em;
+  --tracking-display: 0.15em;   /* для версальных заголовков */
+}
+
+/* Базовые применения. Подгрузить после собственного reset/typography. */
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+}
+
+h1, h2, .display {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
+  color: var(--gold);
+  font-weight: 500;
+}
+
+h3, .subtitle {
+  font-family: var(--font-serif);
+  color: var(--text);
+}
+
+.eyebrow {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  letter-spacing: var(--tracking-loose);
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* Золотая рамка-«трофей» — стр. 6/7 презентации */
+.gold-frame {
+  background: var(--bg-elev);
+  border: 1px solid var(--gold);
+  position: relative;
+  isolation: isolate;
+}
+.gold-frame::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border: 1px solid transparent;
+  background: var(--gold-gradient) border-box;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) padding-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Тонкая разделительная линия с золотым свечением — стр. 1 */
+.gold-rule {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--gold) 50%,
+    transparent 100%
+  );
+  border: 0;
+  margin: 1.5rem auto;
+  max-width: 60ch;
+}
+
+/* Tagline-bar внизу hero — «КВИС ТРЕЙД ЕООД │ ОСНОВАНА 2023 │ …» */
+.tagline-bar {
+  font-family: var(--font-serif);
+  font-size: 0.78rem;
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
+  color: var(--gold-light);
+  text-align: center;
+}
+.tagline-bar > span + span::before {
+  content: " │ ";
+  color: var(--divider);
+  margin: 0 0.6rem;
+}
