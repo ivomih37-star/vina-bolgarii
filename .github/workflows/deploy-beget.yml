@@ -65,7 +65,12 @@ jobs:
       - name: Deploy to Beget via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          server: ftp.beget.com
+          # Хост берётся из переменной репозитория FTP_SERVER (Settings →
+          # Secrets and variables → Actions → вкладка Variables). Значение —
+          # из FTP-раздела панели Beget: обычно технический домен
+          # «<логин>.beget.tech», сам домен «kvistrade.ru» (если он уже
+          # направлен на Beget) либо адрес сервера. «ftp.beget.com» неверен.
+          server: ${{ vars.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
