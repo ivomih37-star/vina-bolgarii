@@ -4,3 +4,4 @@
 # Системное
 .DS_Store
 Thumbs.db
+dist/

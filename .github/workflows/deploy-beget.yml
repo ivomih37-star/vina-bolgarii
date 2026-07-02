@@ -1,0 +1,80 @@
+name: Deploy to Beget (FTP)
+
+# Автодеплой сайта kvistrade.ru на хостинг Beget по FTP.
+# Логин и пароль берутся из секретов репозитория (Settings → Secrets and
+# variables → Actions): FTP_USERNAME и FTP_PASSWORD. Значения секретов
+# подставляются раннером GitHub в момент запуска и нигде не логируются.
+
+on:
+  push:
+    branches:
+      - main
+      - claude/determined-wozniak-yglLg
+    # деплой только когда меняется что-то, влияющее на собранный сайт
+    paths:
+      - "index.template.html"
+      - "legal-templates/**"
+      - "site.config.json"
+      - "build.py"
+      - ".htaccess"
+      - "sitemap.xml"
+      - "robots.txt"
+      - "favicon.ico"
+      - "apple-touch-icon.png"
+      - "assets/logo/**"
+      - "assets/photos/**"
+      - "assets/catalogs/**"
+      - ".github/workflows/deploy-beget.yml"
+  workflow_dispatch: {}   # позволяет запускать вручную из вкладки Actions
+
+concurrency:
+  group: deploy-beget
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build site
+        run: python3 build.py
+
+      - name: Assemble public dist/
+        run: |
+          set -euo pipefail
+          rm -rf dist
+          mkdir -p dist/assets
+          # HTML-страницы
+          cp index.html about.html privacy.html terms.html cookie.html dist/
+          # серверный конфиг Apache и SEO-файлы
+          cp .htaccess sitemap.xml robots.txt dist/
+          # иконки
+          cp favicon.ico apple-touch-icon.png dist/
+          # ассеты (логотип, заготовки под фото/каталоги) — без внутренних brand-доков
+          cp -r assets/logo assets/photos assets/catalogs dist/assets/
+          echo "=== содержимое dist/ ==="
+          find dist -type f | sort
+
+      - name: Deploy to Beget via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ftp.beget.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftp
+          port: 21
+          local-dir: ./dist/
+          server-dir: /kvistrade.ru/public_html/
+          # исключаем только git-мусор; .htaccess под эти маски не попадает
+          # и будет загружен (он лежит в dist/)
+          exclude: |
+            **/.git*
+            **/.git*/**
+          dangerous-clean-slate: false
