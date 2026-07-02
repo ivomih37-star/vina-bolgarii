@@ -1,7 +1,7 @@
 # Письма производителям-партнёрам с просьбой о backlink
 
 **Цель:** получить ссылку с официальных сайтов виноделен (`katarzyna.bg`,
-`blackseagold.com`, `sis.bg`) на `kvistraide.com` в разделе
+`blackseagold.com`, `sis.bg`) на `kvistrade.ru` в разделе
 «Distributors / Russia» / «Partners» / «Где купить».
 
 **Почему это критично:** ссылка с .bg-домена производителя — самый сильный
@@ -46,7 +46,7 @@
 > - Website: {{SITE_URL}}
 > - Contact: {{EMAIL}} · {{PHONE_DISPLAY}}
 >
-> Suggested anchor text: *"KVIS TRADE — Russia"* or simply *"kvistraide.com"*.
+> Suggested anchor text: *"KVIS TRADE — Russia"* or simply *"kvistrade.ru"*.
 >
 > Thank you for considering this — it would be greatly appreciated.
 >
@@ -86,7 +86,7 @@
 > - Contact: {{EMAIL}} · {{PHONE_DISPLAY}}
 >
 > Suggested anchor: *"KVIS TRADE — Official representative in Russia"*
-> or *"kvistraide.com"*.
+> or *"kvistrade.ru"*.
 >
 > Thank you very much in advance.
 >
@@ -124,7 +124,7 @@
 > - Website: {{SITE_URL}}
 > - Contact: {{EMAIL}} · {{PHONE_DISPLAY}}
 >
-> Suggested anchor: *"KVIS TRADE (Russia)"* or *"kvistraide.com"*.
+> Suggested anchor: *"KVIS TRADE (Russia)"* or *"kvistrade.ru"*.
 >
 > Thank you for your support.
 >
@@ -180,11 +180,11 @@
 
 ## Что делать дальше
 
-1. **Дождаться деплоя сайта** на `kvistraide.com` — без работающего сайта
+1. **Дождаться деплоя сайта** на `kvistrade.ru` — без работающего сайта
    просьбы о backlink выглядят странно.
 2. **Подставить реквизиты** (ИНН, ОГРН, юр.адрес) — без них письмо
    неубедительно, производитель не сможет верифицировать.
-3. **Отправить с делового email на домене** (`info@kvistraide.com`),
+3. **Отправить с делового email на домене** (`info@kvistrade.ru`),
    а не с Gmail — это сильный сигнал серьёзности.
 4. **Получить ответ** — обычно занимает 1–3 недели. Через 7–10 дней без
    ответа можно мягко напомнить.

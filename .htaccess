@@ -10,8 +10,8 @@
   RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
   # www → без www
-  RewriteCond %{HTTP_HOST} ^www\.kvistraide\.com$ [NC]
-  RewriteRule ^(.*)$ https://kvistraide.com/$1 [L,R=301]
+  RewriteCond %{HTTP_HOST} ^www\.kvistrade\.ru$ [NC]
+  RewriteRule ^(.*)$ https://kvistrade.ru/$1 [L,R=301]
 </IfModule>
 
 # 2) Защитные HTTP-заголовки

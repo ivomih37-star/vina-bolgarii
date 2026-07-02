@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://kvistraide.com/</loc>
+    <loc>https://kvistrade.ru/</loc>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://kvistraide.com/about.html</loc>
+    <loc>https://kvistrade.ru/about.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kvistraide.com/privacy.html</loc>
+    <loc>https://kvistrade.ru/privacy.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://kvistraide.com/terms.html</loc>
+    <loc>https://kvistrade.ru/terms.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://kvistraide.com/cookie.html</loc>
+    <loc>https://kvistrade.ru/cookie.html</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

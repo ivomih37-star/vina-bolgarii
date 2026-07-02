@@ -1,20 +1,20 @@
-# Публикация сайта kvistraide.com
+# Публикация сайта kvistrade.ru
 
 Пошаговый план развёртывания на **Cloudflare Pages** с доменом
-`kvistraide.com`. Затраты: **0 ₽/мес** сверх уже купленного домена.
+`kvistrade.ru`. Затраты: **0 ₽/мес** сверх уже купленного домена.
 
 ## Архитектура
 
 ```
 [ Посетитель ]
-       │  https://kvistraide.com
+       │  https://kvistrade.ru
        ▼
 [ Cloudflare DNS + CDN ]
        │
        ▼
 [ Cloudflare Pages ]  ◀── auto-deploy ──  GitHub (ivomih37-star/vina-bolgarii, ветка main)
 
-info@kvistraide.com  →  [ Cloudflare Email Routing ]  →  kvistrade@gmail.com
+info@kvistrade.ru  →  [ Cloudflare Email Routing ]  →  kvistrade@gmail.com
 ```
 
 | Компонент       | Сервис                  | Цена         |
@@ -34,7 +34,7 @@ info@kvistraide.com  →  [ Cloudflare Email Routing ]  →  kvistrade@gmail.com
 - [x] `assets/logo/kvis-trade-gold.png` — прозрачный логотип
 - [x] `favicon.ico`, `apple-touch-icon.png`, `assets/logo/favicon-*.png`
 - [x] `_headers` — security-заголовки + кеш статики
-- [x] `_redirects` — `www.kvistraide.com` → `kvistraide.com` (301)
+- [x] `_redirects` — `www.kvistrade.ru` → `kvistrade.ru` (301)
 - [x] `robots.txt`, `sitemap.xml`
 - [x] OpenGraph / meta description / theme-color в `<head>`
 
@@ -56,7 +56,7 @@ info@kvistraide.com  →  [ Cloudflare Email Routing ]  →  kvistrade@gmail.com
 ## Этап 2. Добавить домен в Cloudflare (10 минут)
 
 1. В дашборде → **Add a domain**.
-2. Ввести `kvistraide.com` → Continue.
+2. Ввести `kvistrade.ru` → Continue.
 3. Выбрать **Free** план → Continue.
 4. Cloudflare просканирует DNS у текущего регистратора (если есть записи)
    и покажет их. На этом этапе можно пропустить — мы донастроим позже.
@@ -76,24 +76,24 @@ info@kvistraide.com  →  [ Cloudflare Email Routing ]  →  kvistrade@gmail.com
 
 ### REG.RU
 1. https://lk.reg.ru → «Мои домены и услуги»
-2. Кликнуть `kvistraide.com` → вкладка **DNS-серверы и управление зоной**
+2. Кликнуть `kvistrade.ru` → вкладка **DNS-серверы и управление зоной**
 3. Кнопка **Изменить**
 4. Удалить `ns1.reg.ru`, `ns2.reg.ru` (или какие там стоят)
 5. Вписать NS от Cloudflare → Сохранить
 
 ### Beget
 1. https://cp.beget.com → **Домены и поддомены**
-2. Шестерёнка справа от `kvistraide.com` → **Управление NS**
+2. Шестерёнка справа от `kvistrade.ru` → **Управление NS**
 3. Заменить на NS Cloudflare → Сохранить
 
 ### Timeweb
 1. https://hosting.timeweb.ru → **Домены**
-2. Кликнуть `kvistraide.com` → **Сменить NS-серверы**
+2. Кликнуть `kvistrade.ru` → **Сменить NS-серверы**
 3. Указать Cloudflare NS → Сохранить
 
 ### nic.ru
 1. https://www.nic.ru → Личный кабинет → **Мои услуги** → **Домены**
-2. Открыть `kvistraide.com` → блок **DNS-серверы** → **Изменить**
+2. Открыть `kvistrade.ru` → блок **DNS-серверы** → **Изменить**
 3. Указать Cloudflare NS → Сохранить
 
 После сохранения вернуться в Cloudflare и нажать **Done, check nameservers**.
@@ -112,14 +112,14 @@ Cloudflare пришлёт email «Your site is now active», когда заме
    - Разрешить доступ к `vina-bolgarii` (можно сразу к одному репо)
 4. Выбрать репозиторий `vina-bolgarii` → **Begin setup**
 5. Параметры:
-   - **Project name:** `kvistraide` (это даст preview-URL `kvistraide.pages.dev`)
+   - **Project name:** `kvistrade` (это даст preview-URL `kvistrade.pages.dev`)
    - **Production branch:** `main`
    - **Framework preset:** None
    - **Build command:** оставить пустым
    - **Build output directory:** `/` (корень)
 6. **Save and Deploy**.
 7. Через ~30 секунд деплой завершится — откроется страница с URL
-   `https://kvistraide.pages.dev`. Открыть, убедиться, что сайт работает.
+   `https://kvistrade.pages.dev`. Открыть, убедиться, что сайт работает.
 
 ### Альтернативно: автосборка из шаблона
 Если хочется, чтобы при правке `index.template.html` сайт сам пересобирался,
@@ -134,21 +134,21 @@ Cloudflare Pages поддерживает Python 3 из коробки.
 ## Этап 5. Привязать домен к Pages (5 минут + 5 минут на SSL)
 
 1. В проекте Pages → вкладка **Custom domains** → **Set up a custom domain**
-2. Ввести `kvistraide.com` → Continue → Activate domain
+2. Ввести `kvistrade.ru` → Continue → Activate domain
 3. Cloudflare автоматически создаст нужные DNS-записи в зоне.
 4. Подождать ~3–5 минут — статус станет **Active**, TLS-сертификат
    выпустится автоматически.
-5. Повторить для `www.kvistraide.com`:
-   - **Set up a custom domain** → `www.kvistraide.com` → Continue.
+5. Повторить для `www.kvistrade.ru`:
+   - **Set up a custom domain** → `www.kvistrade.ru` → Continue.
    - При желании файл `_redirects` уже делает 301 c `www` на основной домен.
 
-Проверить: открыть https://kvistraide.com — должен открываться сайт по HTTPS.
+Проверить: открыть https://kvistrade.ru — должен открываться сайт по HTTPS.
 
 ---
 
-## Этап 6. Email Routing — `info@kvistraide.com` → Gmail (10 минут)
+## Этап 6. Email Routing — `info@kvistrade.ru` → Gmail (10 минут)
 
-1. В дашборде Cloudflare → выбрать домен `kvistraide.com`
+1. В дашборде Cloudflare → выбрать домен `kvistrade.ru`
 2. Слева **Email** → **Email Routing** → **Get started**
 3. Кнопка **Add records and enable** — Cloudflare сам пропишет MX-записи
    и SPF в DNS.
@@ -159,23 +159,23 @@ Cloudflare Pages поддерживает Python 3 из коробки.
    - **Save**
 5. На `kvistrade@gmail.com` придёт письмо с подтверждением — нажать ссылку.
 6. (Опционально) добавить **Catch-all** в той же секции:
-   - любой адрес `*@kvistraide.com` будет уходить на `kvistrade@gmail.com`.
-7. Тест: отправить с другой почты на `info@kvistraide.com`. Письмо должно
+   - любой адрес `*@kvistrade.ru` будет уходить на `kvistrade@gmail.com`.
+7. Тест: отправить с другой почты на `info@kvistrade.ru`. Письмо должно
    прийти в Gmail в течение минуты.
 
 **Важно про отправку:** Cloudflare Email Routing только **получает**.
-Чтобы отправлять *из* `info@kvistraide.com`, надо настроить «Send mail as»
+Чтобы отправлять *из* `info@kvistrade.ru`, надо настроить «Send mail as»
 в Gmail. Это отдельный шаг, опишу при необходимости.
 
 ---
 
 ## Этап 7. Обновить контакты на сайте
 
-После того как `info@kvistraide.com` заработает, можно показать его на
+После того как `info@kvistrade.ru` заработает, можно показать его на
 сайте вместо `kvistrade@gmail.com`. В `site.config.json`:
 
 ```json
-"email": "info@kvistraide.com",
+"email": "info@kvistrade.ru",
 ```
 
 `git push` — Cloudflare Pages пересоберёт сайт за минуту.
@@ -184,13 +184,13 @@ Cloudflare Pages поддерживает Python 3 из коробки.
 
 ## Этап 8. Финальные проверки (10 минут)
 
-- [ ] https://kvistraide.com — открывается, иконка-узел в табе
-- [ ] https://www.kvistraide.com — редирект на apex
+- [ ] https://kvistrade.ru — открывается, иконка-узел в табе
+- [ ] https://www.kvistrade.ru — редирект на apex
 - [ ] HTTPS зелёный, сертификат от Let's Encrypt / Google Trust Services
 - [ ] Открыть на iPhone и Android — адаптив работает
 - [ ] Age-gate появляется при первом заходе
-- [ ] Кнопки «Запросить по почте» открывают `mailto:info@kvistraide.com`
-- [ ] Письмо на `info@kvistraide.com` приходит в Gmail
+- [ ] Кнопки «Запросить по почте» открывают `mailto:info@kvistrade.ru`
+- [ ] Письмо на `info@kvistrade.ru` приходит в Gmail
 - [ ] https://pagespeed.web.dev/ → 95+ на десктопе, 85+ на мобильном
 
 ---

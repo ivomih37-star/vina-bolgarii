@@ -28,7 +28,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
-SITE_URL = "https://kvistraide.com"
+SITE_URL = "https://kvistrade.ru"
 LEGAL_TEMPLATES_DIR = ROOT / "legal-templates"
 LEGAL_OUTPUT_FILES = ("privacy.html", "terms.html", "cookie.html", "about.html")
 

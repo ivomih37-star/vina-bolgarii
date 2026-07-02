@@ -1,4 +1,4 @@
 # Cloudflare Pages redirects
 # https://developers.cloudflare.com/pages/configuration/redirects/
 
-https://www.kvistraide.com/*  https://kvistraide.com/:splat  301
+https://www.kvistrade.ru/*  https://kvistrade.ru/:splat  301
