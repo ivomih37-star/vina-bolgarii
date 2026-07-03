@@ -76,7 +76,9 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./dist/
-          server-dir: /kvistrade.ru/public_html/
+          # FTP-логин Beget упирается прямо в docroot сайта
+          # (/kvistrade.ru/public_html/), поэтому заливаем в корень FTP «/».
+          server-dir: /
           # исключаем только git-мусор; .htaccess под эти маски не попадает
           # и будет загружен (он лежит в dist/)
           exclude: |
