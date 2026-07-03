@@ -54,7 +54,7 @@ jobs:
           # HTML-страницы
           cp index.html about.html privacy.html terms.html cookie.html dist/
           # серверный конфиг Apache и SEO-файлы
-          cp .htaccess sitemap.xml robots.txt dist/
+          cp .htaccess sitemap.xml robots.txt googled2a53d5d5040e2c9.html dist/
           # иконки
           cp favicon.ico apple-touch-icon.png dist/
           # ассеты (логотип, заготовки под фото/каталоги) — без внутренних brand-доков
