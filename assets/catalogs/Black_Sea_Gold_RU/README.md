@@ -14,8 +14,9 @@
 
 ## Файлы
 
-- `Black_Sea_Gold_Catalog_RU.md` — мастер-текст каталога (главы 1–6).
-- `Black_Sea_Gold_Catalog_RU.docx` — экспорт в docx (сгенерирован из .md через pandoc).
+- `Black_Sea_Gold_Catalog_RU.md` — мастер-текст каталога (главы 1–6), источник правды для правок.
+- `Black_Sea_Gold_Catalog_RU.docx` — экспорт в docx (pandoc, из .md).
+- `Black_Sea_Gold_Catalog_RU.pdf` — экспорт в pdf (pandoc → HTML → печать в PDF через headless Chromium), в цветах и духе фирменного стиля сайта.
 - `Glossary_Terms.md` — единый словарь терминов.
 - `Photos/` — пока пусто; сюда добавить профессиональные фото бутылок (см. список ниже).
 
