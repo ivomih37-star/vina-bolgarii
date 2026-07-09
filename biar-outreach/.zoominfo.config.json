@@ -1,0 +1,113 @@
+{
+  "version": "1.0",
+  "company": {
+    "name": "КВИС ТРЕЙД",
+    "displayName": "КВИС ТРЕЙД — Болгарские вина и крепкие напитки",
+    "email": "im@kvistrade.com",
+    "phone": "+7 916 243-23-96",
+    "website": "https://vina-bolgarii.ru",
+    "country": "RU",
+    "industry": "Food & Beverage Distribution",
+    "description": "Официальное представительство болгарских производителей вин и крепких напитков на рынке России. Гастрономическая дипломатия — солнце Фракии в каждом бокале."
+  },
+  "products": [
+    {
+      "id": "katarzyna",
+      "name": "Katarzyna Estate",
+      "tier": "A",
+      "category": "Premium Red Wines",
+      "region": "Thrace Valley, Bulgaria",
+      "description": "Премиальные красные вина (Cabernet, Merlot, Syrah) с выдержкой в дубе. Защищённое наименование места происхождения (PDO).",
+      "targetSegments": ["fine-dining", "wine-shops", "premium-restaurants"],
+      "priceRange": "high"
+    },
+    {
+      "id": "blackseagold",
+      "name": "Black Sea Gold",
+      "tier": "B",
+      "category": "White & Sparkling Wines",
+      "region": "Pomorie, Black Sea Coast, Bulgaria",
+      "description": "Белые вина, игристые и мускаты из Поморского побережья. PDO.",
+      "targetSegments": ["wine-bars", "restaurants", "aperitif-bars"],
+      "priceRange": "medium-premium"
+    },
+    {
+      "id": "sis-industries",
+      "name": "SIS Industries",
+      "tier": "C",
+      "category": "Spirits & Distillates",
+      "description": "Крепкие напитки: бренди, ракия, дистилляты. Прямой импорт от производителя.",
+      "targetSegments": ["bars", "distributors", "wholesale"],
+      "priceRange": "medium"
+    }
+  ],
+  "targetMarket": {
+    "country": "Russia",
+    "language": "ru",
+    "industries": [
+      "Restaurants & Hospitality",
+      "Retail Wine Shops",
+      "Bars & Nightclubs",
+      "Food & Beverage Distribution",
+      "Hotels & Resorts"
+    ],
+    "companySize": [
+      "10-50",
+      "50-200",
+      "200-1000"
+    ],
+    "jobTitles": [
+      "Buyer",
+      "Sommelier",
+      "Wine Director",
+      "Restaurant Manager",
+      "General Manager",
+      "Owner",
+      "Head of Procurement"
+    ]
+  },
+  "searchFilters": {
+    "keywords": [
+      "wine importer",
+      "restaurant supplier",
+      "wine retailer",
+      "beverage distributor",
+      "gastronomy",
+      "HoReCa"
+    ],
+    "excludeKeywords": [
+      "mass-market",
+      "discount",
+      "budget wine"
+    ],
+    "geography": [
+      "Moscow",
+      "Saint Petersburg",
+      "Yekaterinburg",
+      "Sochi",
+      "Kazan"
+    ]
+  },
+  "enrichmentSettings": {
+    "enrichDecisionMakers": true,
+    "getContactEmails": true,
+    "getPhoneNumbers": true,
+    "getCompanySocial": true,
+    "getCompanyFunding": false,
+    "getTechnologies": false,
+    "minConfidenceScore": 0.75
+  },
+  "scoringWeights": {
+    "segment_match": 0.25,
+    "company_size": 0.20,
+    "decision_maker_found": 0.25,
+    "contact_quality": 0.15,
+    "geographic_focus": 0.15
+  },
+  "integrations": {
+    "mcp": false,
+    "crmSync": false,
+    "emailTracking": false
+  },
+  "notes": "Конфигурация оптимизирована для B2B аутрича премиальных вин на российском рынке HoReCa. Основной источник лидов сейчас — ручной CSV (выключен USE_2GIS). Когда подключите ZoomInfo API, активируйте enrichmentSettings и установите integrations.mcp=true."
+}
