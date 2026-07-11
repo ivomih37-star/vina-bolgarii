@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Sea Gold · Стратегия вывода на рынок РФ — КВИС ТРЕЙД</title>
+<meta name="description" content="Стратегический анализ российского рынка алкогольной продукции и план вывода портфеля Black Sea Gold. Подготовлено для «КВИС ТРЕЙД» ЕООД.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cormorant+SC:wght@500;600;700&family=Manrope:wght@300;400;500;600;700;800&family=Forum&display=swap');
+
+/* ============================================================
+   BLACK SEA GOLD — MARKET ENTRY REPORT
+   Фирменный стиль КВИС ТРЕЙД: бордо · терракота · золото · пергамент
+   ============================================================ */
+
+:root{
+  --bordo:#4a1320;
+  --bordo-deep:#3a0e19;
+  --terra:#b9542d;
+  --gold:#c8a24a;
+  --gold-light:#e9d199;
+  --gold-dark:#8a6a2b;
+  --parchment:#f6efe2;
+  --cream:#f3e9d8;
+  --ink:#2a1c17;
+  --ink-soft:#5c4a40;
+  --paper:#fffdf8;
+  --line:rgba(74,19,32,0.14);
+  --line-gold:rgba(200,162,74,0.45);
+  --black:#0a0a0a;
+  --card:#15151a;
+  --pos:#4f7a4b;
+  --neg:#9e3b2e;
+  --warn:#b9542d;
+  --shadow:0 8px 30px rgba(42,28,23,0.10);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{
+  font-family:'Manrope',system-ui,sans-serif;
+  color:var(--ink);
+  background:#c9bfae;
+  font-size:10.2pt;
+  line-height:1.62;
+  font-weight:400;
+}
+
+/* ---------- Paper sheets (A4) ---------- */
+.sheet{
+  width:210mm;
+  min-height:297mm;
+  margin:10mm auto;
+  padding:22mm 20mm 20mm;
+  background:var(--paper);
+  position:relative;
+  box-shadow:0 6px 26px rgba(0,0,0,0.28);
+  overflow:hidden;
+}
+.sheet.cover{padding:0;background:var(--black);color:var(--cream)}
+.sheet.dark{background:var(--bordo-deep);color:var(--cream)}
+
+/* running header / footer */
+.sheet::before{
+  content:"КВИС ТРЕЙД · BLACK SEA GOLD — Стратегия вывода на рынок РФ";
+  position:absolute;top:9mm;left:20mm;right:20mm;
+  font-family:'Forum',serif;font-size:7pt;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--gold-dark);
+  border-bottom:.5pt solid var(--line-gold);padding-bottom:3mm;
+}
+.sheet.cover::before,.sheet.dark::before,.sheet.notoc::before{content:none}
+.pagenum{
+  position:absolute;bottom:11mm;right:20mm;
+  font-family:'Forum',serif;font-size:8pt;letter-spacing:.1em;color:var(--gold-dark);
+}
+.pagenum::after{counter-increment:pg;content:counter(pg)}
+body{counter-reset:pg 0}
+.foot-brand{
+  position:absolute;bottom:11mm;left:20mm;
+  font-family:'Forum',serif;font-size:7pt;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-soft);opacity:.7;
+}
+
+/* ---------- Typography ---------- */
+h1,h2,h3,h4{font-family:'Cormorant',serif;color:var(--bordo);font-weight:600;line-height:1.12}
+h2.section-title{
+  font-family:'Cormorant SC','Cormorant',serif;
+  font-size:26pt;font-weight:700;letter-spacing:.01em;
+  color:var(--bordo);margin:0 0 2mm;
+}
+.kicker{
+  font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.22em;
+  font-size:8.5pt;color:var(--terra);margin-bottom:3mm;display:block;
+}
+.section-num{
+  font-family:'Cormorant SC',serif;font-size:11pt;color:var(--gold-dark);
+  letter-spacing:.1em;
+}
+h3{font-size:15pt;margin:7mm 0 2.5mm;color:var(--bordo)}
+h4{font-size:11.5pt;margin:5mm 0 1.5mm;color:var(--terra);font-weight:700;
+   font-family:'Manrope',sans-serif;text-transform:uppercase;letter-spacing:.05em}
+p{margin:0 0 2.6mm;text-align:justify;hyphens:auto}
+strong{color:var(--bordo);font-weight:700}
+em{color:var(--terra);font-style:italic}
+a{color:var(--terra);text-decoration:none}
+ul,ol{margin:0 0 3mm 5mm}
+li{margin-bottom:1.4mm}
+sup{font-size:6.5pt;color:var(--terra);font-weight:700;vertical-align:super}
+.lead{font-size:11.5pt;line-height:1.6;color:var(--ink-soft)}
+.divider-rule{height:0;border-top:1.5pt solid var(--gold);width:34mm;margin:4mm 0}
+
+/* ---------- Tables ---------- */
+table{width:100%;border-collapse:collapse;margin:4mm 0;font-size:8.6pt}
+caption{caption-side:top;text-align:left;font-family:'Forum',serif;
+  font-size:8pt;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-dark);padding-bottom:1.5mm}
+thead th{
+  background:var(--bordo);color:var(--gold-light);
+  font-weight:600;text-align:left;padding:2mm 2.4mm;font-size:8.2pt;
+  border-bottom:1.5pt solid var(--gold);vertical-align:bottom;
+}
+tbody td{padding:1.8mm 2.4mm;border-bottom:.5pt solid var(--line);vertical-align:top}
+tbody tr:nth-child(even){background:rgba(246,239,226,0.55)}
+tbody tr:hover{background:rgba(200,162,74,0.12)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.c,th.c{text-align:center}
+table.compact{font-size:8pt}
+table.compact tbody td{padding:1.3mm 2mm}
+.tbl-note{font-size:7.4pt;color:var(--ink-soft);margin-top:1mm;font-style:italic}
+
+/* ---------- Stat tiles ---------- */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm;margin:4mm 0}
+.stat-row.three{grid-template-columns:repeat(3,1fr)}
+.stat-row.two{grid-template-columns:repeat(2,1fr)}
+.stat{
+  border:.75pt solid var(--line-gold);border-top:2.5pt solid var(--gold);
+  padding:4mm 4mm 3.5mm;background:linear-gradient(180deg,rgba(246,239,226,.6),rgba(255,253,248,.2));
+  border-radius:1.5mm;
+}
+.stat .v{font-family:'Cormorant',serif;font-size:23pt;font-weight:700;color:var(--bordo);line-height:1}
+.stat .v small{font-size:12pt;color:var(--terra);font-weight:600}
+.stat .l{font-size:7.6pt;color:var(--ink-soft);margin-top:1.5mm;line-height:1.35;text-transform:uppercase;letter-spacing:.04em}
+.stat .d{font-size:8pt;font-weight:700;margin-top:1mm}
+.stat .d.up{color:var(--pos)} .stat .d.down{color:var(--neg)}
+
+/* ---------- Callouts ---------- */
+.callout{border-left:3pt solid var(--gold);background:rgba(246,239,226,.7);
+  padding:3.5mm 4mm;margin:4mm 0;border-radius:0 1.5mm 1.5mm 0}
+.callout.terra{border-left-color:var(--terra)}
+.callout.bordo{border-left-color:var(--bordo);background:rgba(74,19,32,.05)}
+.callout .ct{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.14em;
+  font-size:8pt;color:var(--gold-dark);margin-bottom:1.5mm}
+.callout.key{background:var(--bordo);color:var(--cream);border-left-color:var(--gold)}
+.callout.key .ct{color:var(--gold-light)}
+.callout.key strong{color:var(--gold-light)}
+
+/* ---------- Charts (CSS/SVG) ---------- */
+.chart{margin:4mm 0}
+.chart .ct{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.12em;
+  font-size:8pt;color:var(--gold-dark);margin-bottom:2.5mm}
+.bar-row{display:flex;align-items:center;gap:3mm;margin-bottom:2mm;font-size:8.4pt}
+.bar-row .lab{width:44mm;flex-shrink:0;color:var(--ink-soft);text-align:right}
+.bar-track{flex:1;background:rgba(74,19,32,.07);border-radius:1mm;height:6mm;position:relative;overflow:hidden}
+.bar-fill{height:100%;border-radius:1mm;background:linear-gradient(90deg,var(--gold-dark),var(--gold));
+  display:flex;align-items:center;justify-content:flex-end;padding-right:2mm;
+  color:#fff;font-size:7.6pt;font-weight:700}
+.bar-fill.bordo{background:linear-gradient(90deg,var(--bordo-deep),var(--bordo))}
+.bar-fill.terra{background:linear-gradient(90deg,#8f3d1f,var(--terra))}
+.bar-fill.muted{background:linear-gradient(90deg,#b9b0a0,#d8cfbd);color:var(--ink)}
+.legend{display:flex;flex-wrap:wrap;gap:4mm;font-size:7.8pt;margin-top:2mm;color:var(--ink-soft)}
+.legend span{display:flex;align-items:center;gap:1.5mm}
+.dot{width:2.6mm;height:2.6mm;border-radius:.5mm;display:inline-block}
+
+/* ---------- SWOT ---------- */
+.swot{display:grid;grid-template-columns:1fr 1fr;gap:4mm;margin:4mm 0}
+.swot .q{border:.75pt solid var(--line);border-radius:1.5mm;padding:3.5mm 4mm}
+.swot .q h4{margin:0 0 2mm;font-size:11pt}
+.swot .s{border-top:3pt solid var(--pos)} .swot .s h4{color:var(--pos)}
+.swot .w{border-top:3pt solid var(--neg)} .swot .w h4{color:var(--neg)}
+.swot .o{border-top:3pt solid var(--gold-dark)} .swot .o h4{color:var(--gold-dark)}
+.swot .t{border-top:3pt solid var(--bordo)} .swot .t h4{color:var(--bordo)}
+.swot ul{margin:0 0 0 4mm;font-size:8.4pt}
+
+/* ---------- Timeline ---------- */
+.phase{border-left:2pt solid var(--line-gold);padding:0 0 4mm 6mm;margin-left:3mm;position:relative}
+.phase::before{content:"";position:absolute;left:-2.2mm;top:1mm;width:4mm;height:4mm;
+  border-radius:50%;background:var(--gold);border:1.5pt solid var(--bordo)}
+.phase .ph{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.12em;
+  font-size:8pt;color:var(--terra)}
+
+/* ---------- Misc ---------- */
+.two-col{column-count:2;column-gap:8mm}
+.avoid-break{break-inside:avoid}
+.page-break{break-before:page}
+.tag{display:inline-block;font-size:7pt;font-weight:700;padding:.4mm 2mm;border-radius:3mm;
+  text-transform:uppercase;letter-spacing:.05em;vertical-align:middle}
+.tag.super{background:var(--bordo);color:var(--gold-light)}
+.tag.prem{background:var(--gold);color:var(--bordo)}
+.tag.mid{background:rgba(185,84,45,.18);color:var(--terra)}
+.tag.eco{background:rgba(92,74,64,.15);color:var(--ink-soft)}
+.footnotes{font-size:7.2pt;color:var(--ink-soft);border-top:.5pt solid var(--line);
+  margin-top:6mm;padding-top:2mm;line-height:1.4}
+.footnotes p{margin-bottom:1mm;text-align:left}
+
+/* ---------- TOC ---------- */
+.toc-list{list-style:none;margin:6mm 0 0}
+.toc-list li{display:flex;align-items:baseline;margin-bottom:3.2mm;font-size:10.5pt}
+.toc-list .tn{font-family:'Cormorant SC',serif;color:var(--gold-dark);width:9mm;font-size:11pt}
+.toc-list .tt{color:var(--ink);font-weight:500}
+.toc-list .dots{flex:1;border-bottom:.5pt dotted var(--line);margin:0 2mm;transform:translateY(-1mm)}
+.toc-list .tp{font-family:'Forum',serif;color:var(--terra);font-size:9pt}
+.toc-list .grp{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.16em;
+  font-size:8pt;color:var(--terra);margin:5mm 0 2mm;display:block}
+
+/* ---------- Cover ---------- */
+.cover-inner{position:absolute;inset:0;display:flex;flex-direction:column;padding:24mm 22mm;
+  background:
+    radial-gradient(120% 60% at 50% -10%,rgba(200,162,74,.16),transparent 60%),
+    linear-gradient(180deg,#0a0a0a,#120a0d 55%,#0a0a0a);}
+.cover-frame{position:absolute;inset:10mm;border:.75pt solid rgba(200,162,74,.4)}
+.cover-frame::before,.cover-frame::after{content:"";position:absolute;width:8mm;height:8mm}
+.cover-topline{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.3em;
+  font-size:8.5pt;color:var(--gold);text-align:center}
+.cover-logo{font-family:'Cormorant SC',serif;font-size:20pt;letter-spacing:.28em;
+  color:var(--gold-light);text-align:center;margin-top:2mm}
+.cover-mid{margin-top:auto;margin-bottom:auto}
+.cover-title{font-family:'Cormorant',serif;font-weight:700;font-size:44pt;line-height:1.04;
+  color:var(--cream);text-align:center}
+.cover-title .em{color:var(--gold);font-style:italic}
+.cover-sub{font-family:'Forum',serif;text-transform:uppercase;letter-spacing:.2em;
+  font-size:10pt;color:rgba(243,233,216,.7);text-align:center;margin-top:6mm;line-height:1.8}
+.cover-rule{width:40mm;height:1pt;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:8mm auto}
+.cover-foot{text-align:center;font-size:8pt;color:rgba(243,233,216,.55);
+  font-family:'Forum',serif;letter-spacing:.14em;line-height:2}
+.cover-badge{border:.75pt solid rgba(200,162,74,.5);border-radius:1mm;padding:2mm 5mm;
+  display:inline-block;color:var(--gold-light);font-size:8pt;letter-spacing:.18em;
+  text-transform:uppercase;margin:0 auto}
+
+@media print{
+  body{background:#fff}
+  .sheet{margin:0;box-shadow:none;width:auto;min-height:auto}
+  .no-print{display:none}
+  @page{size:A4;margin:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================ COVER -->
+<section class="sheet cover">
+  <div class="cover-inner">
+    <div class="cover-frame"></div>
+    <div class="cover-topline">Конфиденциально · Стратегический анализ</div>
+    <div class="cover-logo">КВИС ТРЕЙД</div>
+
+    <div class="cover-mid">
+      <div class="cover-badge">Black Sea Gold · Pomorie · Bulgaria</div>
+      <h1 class="cover-title">Выход на российский<br>рынок <span class="em">премиального</span><br>алкоголя</h1>
+      <div class="cover-rule"></div>
+      <div class="cover-sub">
+        Аналитика рынка · Конкурентная карта · Ценовое позиционирование<br>
+        SWOT · Финансовая модель · Стратегия и план запуска на 24 месяца
+      </div>
+    </div>
+
+    <div class="cover-foot">
+      Подготовлено для «КВИС ТРЕЙД» ЕООД · ЕИК 207595321 · София, Болгария<br>
+      Портфель: Black Sea Gold (Поморие) · Katarzyna Estate · SIS Industries<br>
+      <span style="color:var(--gold)">Редакция 1.0 · Июль 2026 · Горизонт планирования 2026–2028</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ DISCLAIMER / METHOD -->
+<section class="sheet">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="kicker">О документе</span>
+  <h2 class="section-title">Назначение, источники и методология</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">Настоящий отчёт подготовлен как стратегический навигатор для вывода портфеля
+  болгарского производителя <strong>Black Sea Gold (Поморие)</strong> и смежных линеек
+  (тихие вина Katarzyna Estate, крепкие напитки SIS Industries) на рынок Российской
+  Федерации силами эксклюзивного импортёра-дистрибьютора <strong>«КВИС ТРЕЙД» ЕООД</strong>.</p>
+
+  <h4>Что содержит документ</h4>
+  <p>Макроанализ рынка алкоголя РФ; глубокий разбор трёх целевых категорий (бренди/коньяк,
+  ракия и фруктовые дистилляты, вино); конкурентную карту на <strong>90+ брендов</strong>;
+  анализ федерального ритейла и HoReCa Москвы; ценовые карты; портрет потребителя; SWOT
+  и карту рисков; стратегию, дорожную карту на 24 месяца, финансовую модель, план маркетинга и KPI.</p>
+
+  <h4>Источники данных</h4>
+  <p>Рыночная статистика опирается на публичные данные <strong>Росалкогольтабакконтроля
+  (РАТК/РАР)</strong>, Росстата, ФТС, отраслевых аналитиков (INFOLine, A.List, WineRetail,
+  «Винодельческий союз»), деловых СМИ (РБК, «Ведомости», «Коммерсантъ») и открытых отчётов
+  ритейлеров за 2024–2026 гг. Ключевые цифры снабжены сносками с указанием источника
+  (см. Приложение E «Источники»).</p>
+
+  <div class="callout terra">
+    <div class="ct">Статус данных и оговорка о точности</div>
+    <p style="margin:0">Рыночные агрегаты (объёмы в дал, доли, цены МРЦ, выручка сетей) —
+    <strong>проверяемые</strong> и приведены со ссылками. Бренд-уровневые цены в конкурентных
+    и ценовых картах даны как <strong>индикативные рыночные диапазоны</strong> полочной цены
+    по наблюдениям в федеральной рознице середины 2025 – первой половины 2026 г. и подлежат
+    актуализации перед запуском (цены на алкоголь в РФ в 2025–2026 гг. волатильны из-за роста
+    акцизов и МРЦ). Финансовая модель — сценарная; допущения раскрыты в Разделе 16.</p>
+  </div>
+
+  <h4>Валюта и единицы</h4>
+  <p>Денежные величины — в рублях РФ (₽) и, где уместно, в евро (€). Курсовой ориентир модели:
+  <strong>1 € ≈ 100 ₽</strong>. Объёмы крепкого алкоголя и вина — в декалитрах (дал; 1 дал = 10 л)
+  и в 9-литровых кейсах (условная единица отгрузки). «Недружественные страны» — статус ЕС
+  (включая Болгарию) в терминологии таможенно-тарифного регулирования РФ.</p>
+
+  <div class="footnotes">
+    <p>Документ носит рекомендательный характер и не является офертой, инвестиционным
+    советом или юридическим заключением. Перед принятием коммерческих решений рекомендуется
+    верификация ключевых допущений (пошлины, МРЦ, листинг-условия сетей) на дату запуска.</p>
+  </div>
+</section>
+
+<!-- ============================================================ TOC -->
+<section class="sheet">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="kicker">Навигация</span>
+  <h2 class="section-title">Содержание</h2>
+  <div class="divider-rule"></div>
+
+  <ul class="toc-list">
+    <span class="grp">Часть I · Рынок</span>
+    <li><span class="tn">01</span><span class="tt">Титульный лист</span><span class="dots"></span><span class="tp">1</span></li>
+    <li><span class="tn">02</span><span class="tt">Executive Summary — ключевые выводы</span><span class="dots"></span><span class="tp">5</span></li>
+    <li><span class="tn">03</span><span class="tt">Российский рынок алкогольной продукции</span><span class="dots"></span><span class="tp">8</span></li>
+    <li><span class="tn">04</span><span class="tt">Анализ рынка бренди и коньяка</span><span class="dots"></span><span class="tp">14</span></li>
+    <li><span class="tn">05</span><span class="tt">Анализ рынка ракии и фруктовых дистиллятов</span><span class="dots"></span><span class="tp">19</span></li>
+    <li><span class="tn">06</span><span class="tt">Анализ рынка вин</span><span class="dots"></span><span class="tp">22</span></li>
+
+    <span class="grp">Часть II · Конкуренция и каналы</span>
+    <li><span class="tn">07</span><span class="tt">Конкурентная карта (90+ брендов)</span><span class="dots"></span><span class="tp">28</span></li>
+    <li><span class="tn">08</span><span class="tt">Анализ федеральных торговых сетей</span><span class="dots"></span><span class="tp">36</span></li>
+    <li><span class="tn">09</span><span class="tt">Анализ HoReCa Москвы</span><span class="dots"></span><span class="tp">42</span></li>
+    <li><span class="tn">10</span><span class="tt">Ценовое позиционирование</span><span class="dots"></span><span class="tp">46</span></li>
+    <li><span class="tn">11</span><span class="tt">Портрет потребителя</span><span class="dots"></span><span class="tp">50</span></li>
+
+    <span class="grp">Часть III · Стратегия и финансы</span>
+    <li><span class="tn">12</span><span class="tt">SWOT-анализ Black Sea Gold</span><span class="dots"></span><span class="tp">54</span></li>
+    <li><span class="tn">13</span><span class="tt">Анализ рисков</span><span class="dots"></span><span class="tp">57</span></li>
+    <li><span class="tn">14</span><span class="tt">Стратегия вывода на рынок</span><span class="dots"></span><span class="tp">60</span></li>
+    <li><span class="tn">15</span><span class="tt">План запуска на 24 месяца</span><span class="dots"></span><span class="tp">66</span></li>
+    <li><span class="tn">16</span><span class="tt">Финансовая модель</span><span class="dots"></span><span class="tp">70</span></li>
+    <li><span class="tn">17</span><span class="tt">План маркетинга</span><span class="dots"></span><span class="tp">76</span></li>
+    <li><span class="tn">18</span><span class="tt">KPI и система управления</span><span class="dots"></span><span class="tp">80</span></li>
+    <li><span class="tn">19</span><span class="tt">Приложения и источники</span><span class="dots"></span><span class="tp">83</span></li>
+  </ul>
+</section>
+
+<!-- ============================================================ EXEC SUMMARY -->
+<section class="sheet">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 02</span>
+  <h2 class="section-title">Executive Summary</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">Российский рынок алкоголя — крупный, растущий в деньгах и одновременно
+  переживающий структурный сдвиг: импорт из ЕС падает, отечественное вино захватывает полку,
+  а тарифная политика делает «лобовой» ввоз болгарской продукции дорогим. Возможность
+  Black Sea Gold — не в объёме, а в <strong>премиальной нише</strong> и в <strong>«умной»
+  модели импорта</strong>, где КВИС ТРЕЙД конвертирует барьеры входа в защитный ров.</p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="v">~3,2<small> трлн ₽</small></div><div class="l">Розничные продажи алкоголя в РФ, 2025</div><div class="d up">▲ 8,3% г/г</div></div>
+    <div class="stat"><div class="v">62–64<small>%</small></div><div class="l">Доля российского вина на внутр. рынке, 2025</div><div class="d up">▲ импортозамещение</div></div>
+    <div class="stat"><div class="v">−26<small>%</small></div><div class="l">Импорт вина в РФ, 9 мес. 2025 (23,6 млн дал)</div><div class="d down">▼ структурный спад</div></div>
+    <div class="stat"><div class="v">−8<small>%</small></div><div class="l">Рынок коньяка/бренди, 2025 (14,8 млн дал)</div><div class="d down">▼ вымывание эконома</div></div>
+  </div>
+
+  <h4>Пять ключевых выводов</h4>
+  <ol>
+    <li><strong>Рынок растёт в деньгах, но не в литрах.</strong> Совокупные продажи алкоголя
+    достигли ~3,2 трлн ₽ (+8,3%)<sup>1</sup>, при этом спрос смещается в дорогие сегменты и в
+    отечественную продукцию. Для импортёра из ЕС «массовые» ниши закрыты ценой — открыт
+    <em>премиум и супер-премиум</em>.</li>
+    <li><strong>Тарифы — главный барьер и одновременно фильтр конкуренции.</strong> Вино из
+    «недружественных» стран облагается пошлиной 25% (не менее $2/л)<sup>2</sup>; крепкий
+    алкоголь — 20%, но не менее €3/л спирта, с планом роста до €5/л с мая 2026<sup>3</sup>.
+    Это выталкивает дешёвый европейский импорт, но щадит премиум, где пошлина — малая доля
+    полки. КВИС ТРЕЙД строит модель вокруг «умной логистики».</li>
+    <li><strong>Полка консолидируется.</strong> ТОП-10 ритейлеров = 31,1% оборота
+    (13,6 трлн ₽)<sup>4</sup>; специализированные алкосети «Красное&Белое», «ВинЛаб»,
+    «Ароматный мир» — ключевые ворота к потребителю. Вход = плата за листинг + ретро-бонусы,
+    поэтому первый год делаем ставку на <em>HoReCa и винотеки Москвы</em> как имиджевый плацдарм.</li>
+    <li><strong>Категория «болгарское» почти обнулилась — это чистый холст.</strong> Поставки
+    болгарского вина в РФ упали на 65% в 2024<sup>5</sup>; в массовом сознании «болгарское вино» —
+    ретро-ассоциация 1980-х. Отсутствие сильных болгарских конкурентов = свободное
+    премиальное позиционирование под флагом «черноморского терруара».</li>
+    <li><strong>Black Sea Gold — недооценённый актив.</strong> Винодельня с историей
+    <strong>с 1932 г.</strong>, 650 га собственных виноградников, «самое титулованное белое
+    вино Болгарии» (Chardonnay Grand Prix)<sup>6</sup>, плюс собственные бренди/ракия. Портфель
+    закрывает три растущие премиальные ниши: игристое/белое, выдержанный бренди, фруктовый дистиллят.</li>
+  </ol>
+
+  <div class="callout key">
+    <div class="ct">Стратегический тезис</div>
+    <p style="margin:0">Не конкурировать по цене с российским вином и грузинским бренди в
+    массе, а занять <strong>премиальную нишу «черноморского терруара»</strong> через HoReCa и
+    винотеки Москвы, используя тарифный барьер как фильтр конкурентов и «умную логистику» как
+    операционное преимущество. Цель 24 месяцев — <strong>управляемый, прибыльный плацдарм</strong>
+    (≈ 18–22 тыс. кейсов/год, узнаваемость в премиальном канале), а не гонка за объёмом.</p>
+  </div>
+
+  <h4>Экономика в одной строке (базовый сценарий)</h4>
+  <table class="compact">
+    <thead><tr><th>Горизонт</th><th class="num">Объём, кейсов</th><th class="num">Выручка, ₽ млн</th><th class="num">Валовая маржа</th><th class="num">EBITDA, ₽ млн</th></tr></thead>
+    <tbody>
+      <tr><td>Год 1 (мес. 1–12)</td><td class="num">6 200</td><td class="num">78</td><td class="num">31%</td><td class="num">−9</td></tr>
+      <tr><td>Год 2 (мес. 13–24)</td><td class="num">15 800</td><td class="num">214</td><td class="num">34%</td><td class="num">14</td></tr>
+      <tr><td>Год 3 (справочно)</td><td class="num">27 500</td><td class="num">392</td><td class="num">36%</td><td class="num">41</td></tr>
+    </tbody>
+  </table>
+  <p class="tbl-note">Полные допущения, P&L, точка безубыточности и сценарии — Раздел 16. Инвестиции первых 18 мес.: ≈ 55–65 млн ₽.</p>
+
+  <div class="footnotes">
+    <p><sup>1</sup> INFOLine, «Ведомости», 2025. <sup>2</sup> Тарифная политика РФ по винам из недружественных стран (с 2023). <sup>3</sup> «Коммерсантъ»/Meduza, план Правительства РФ, март 2026. <sup>4</sup> WineRetail/Retail.ru, итоги 2025. <sup>5</sup> Данные по импорту болгарского вина, 2024. <sup>6</sup> Black Sea Gold Pomorie, корпоративные материалы. Полный список — Приложение E.</p>
+  </div>
+</section>
+
+<!-- ============================================================ SECTION 3: MACRO MARKET -->
+<section class="sheet page-break">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 03 · Часть I</span>
+  <h2 class="section-title">Российский рынок<br>алкогольной продукции</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">Понимание макроконтекста задаёт рамку всей стратегии. Российский рынок
+  алкоголя в 2024–2026 гг. одновременно <strong>растёт в деньгах</strong>, <strong>сжимается
+  в натуральном выражении в ряде категорий</strong> и переживает <strong>ускоренное
+  импортозамещение</strong>. Для импортёра премиальной болгарской продукции это означает:
+  массовые ниши закрыты, а «умный» премиум-вход — открыт.</p>
+
+  <h3>3.1. Размер и динамика рынка</h3>
+  <p>По оценке INFOLine, совокупные розничные продажи алкогольной продукции (включая пиво и
+  слабоалкогольные напитки) в 2025 г. достигли <strong>≈ 3,2 трлн ₽</strong> (+8,3% г/г) и
+  продолжат расти темпом ~11% в год — в 1,7 раза быстрее продуктовой розницы — до ≈ 4,9 трлн ₽
+  к 2029 г.<sup>1</sup> Рост носит преимущественно <em>ценовой</em> характер: индексация акцизов
+  и минимальных розничных цен (МРЦ) переоценивает полку, тогда как физические объёмы в ряде
+  сегментов стагнируют или падают.</p>
+
+  <div class="stat-row">
+    <div class="stat"><div class="v">3,2<small> трлн ₽</small></div><div class="l">Розничные продажи алкоголя, 2025</div><div class="d up">▲ 8,3% г/г</div></div>
+    <div class="stat"><div class="v">~11<small>%</small></div><div class="l">Прогноз CAGR рынка до 2029 (INFOLine)</div><div class="d up">▲ x1,7 к рознице</div></div>
+    <div class="stat"><div class="v">0,63<small> трлн ₽</small></div><div class="l">Продажи вина, 2025</div><div class="d up">▲ 14,7%</div></div>
+    <div class="stat"><div class="v">0,73<small> трлн ₽</small></div><div class="l">Крепкий алкоголь без водки, 2025</div><div class="d up">▲ 17,2%</div></div>
+  </div>
+
+  <div class="chart avoid-break">
+    <div class="ct">Прогноз объёма рынка алкоголя РФ, трлн ₽ (INFOLine)</div>
+    <div class="bar-row"><span class="lab">2025 (факт)</span><div class="bar-track"><div class="bar-fill" style="width:65%">3,2</div></div></div>
+    <div class="bar-row"><span class="lab">2026 (прогноз)</span><div class="bar-track"><div class="bar-fill" style="width:72%">3,6</div></div></div>
+    <div class="bar-row"><span class="lab">2027 (прогноз)</span><div class="bar-track"><div class="bar-fill" style="width:80%">4,0</div></div></div>
+    <div class="bar-row"><span class="lab">2029 (прогноз)</span><div class="bar-track"><div class="bar-fill bordo" style="width:100%">4,9</div></div></div>
+  </div>
+
+  <h3>3.2. Структура рынка по категориям</h3>
+  <p>Крепкий алкоголь (водка, коньяк/бренди, виски, ром, ликёры) формирует основную долю
+  стоимости; вино и игристое — вторая по значимости группа со стабильным ростом в деньгах;
+  пиво доминирует в литрах. Ключевой сдвиг 2024–2026 гг. — <strong>«премиумизация»</strong>:
+  спрос смещается в верхние ценовые сегменты, а нижние вымываются ростом МРЦ.</p>
+
+  <table>
+    <caption>Категории рынка: динамика и релевантность для Black Sea Gold</caption>
+    <thead><tr><th>Категория</th><th>Объём/деньги, 2025</th><th>Динамика</th><th>Тренд</th><th class="c">Релевантность BSG</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Водка</strong></td><td>≈ 1,21 млрд л (ЛВИ)</td><td>слабое снижение</td><td>МРЦ ↑ на 60 ₽</td><td class="c">—</td></tr>
+      <tr><td><strong>Коньяк / бренди</strong></td><td>14,8 млн дал</td><td class="num">−8,2%</td><td>вымывание эконома, рост премиума</td><td class="c">●●●</td></tr>
+      <tr><td><strong>Тихое вино</strong></td><td>0,63 трлн ₽ (кат.)</td><td class="num">+4% (RU)</td><td>импортозамещение</td><td class="c">●●●</td></tr>
+      <tr><td><strong>Игристое вино</strong></td><td>рост производства +8–10%</td><td class="num">▲</td><td>RU-доля 74%</td><td class="c">●●●</td></tr>
+      <tr><td><strong>Виски / ром / джин</strong></td><td>импортозависимы</td><td>под давлением пошлин</td><td>параллельный импорт</td><td class="c">●</td></tr>
+      <tr><td><strong>Ракия / фрукт. дистилляты</strong></td><td>ниша, нет отд. учёта</td><td>эмерджентный</td><td>гастрономический тренд</td><td class="c">●●</td></tr>
+      <tr><td><strong>Пиво</strong></td><td>доминирует в литрах</td><td>стабильно</td><td>не наш сегмент</td><td class="c">—</td></tr>
+    </tbody>
+  </table>
+  <p class="tbl-note">●●● — ядро портфеля; ●● — тактическая ниша; ● — периферия; — вне фокуса. Источники: РАТК, INFOLine, WineRetail, 2025.</p>
+
+  <h3>3.3. Регуляторная среда — определяющий фактор</h3>
+  <p>Ни одна стратегия импорта в РФ не может игнорировать три регуляторных рычага, которые в
+  2024–2026 гг. работают синхронно и меняют экономику полки: <strong>акцизы</strong>,
+  <strong>минимальные розничные цены (МРЦ)</strong> и <strong>ввозные пошлины</strong>.</p>
+
+  <div class="callout bordo avoid-break">
+    <div class="ct">Регуляторный «тройной удар» 2025–2026</div>
+    <ul style="margin:0 0 0 4mm">
+      <li><strong>Акцизы ↑.</strong> Ставка на этиловый спирт выросла на 15% — с 643 до 740 ₽/л
+      с 2025 г.; акциз на тихое вино — по траектории 108→113→118→123 ₽/л к 2026–2027<sup>7</sup>.</li>
+      <li><strong>МРЦ ↑.</strong> С начала 2025 г. минимальные цены на бренди выросли на 17,1%
+      (до 472 ₽ за 0,5 л), на коньяк — на 17,1% (до 651 ₽); МРЦ на водку повышают ещё на 60 ₽<sup>8</sup>.</li>
+      <li><strong>Пошлины ↑.</strong> Вино из недружественных стран (вкл. Болгарию): 25%, но не
+      менее $2/л. Крепкий алкоголь: 20%, но не менее €3/л спирта, с планом до €5/л с 01.05.2026<sup>2,3</sup>.</li>
+    </ul>
+  </div>
+
+  <p>Совокупный эффект: нижний и средний ценовые сегменты импортного алкоголя <em>сжимаются</em>
+  (пошлина + акциз + МРЦ «съедают» ценовое преимущество), а российские производители получают
+  защиту. <strong>Для премиального импорта эффект обратный:</strong> при полочной цене
+  2 500–6 000 ₽ фиксированная пошлина ($2/л или €3–5/л спирта) — это лишь несколько процентов
+  цены, поэтому конкурентная позиция премиума почти не страдает, а «шумные» дешёвые конкуренты
+  уходят с полки. Именно на этой асимметрии строится стратегия (Раздел 14).</p>
+
+  <div class="footnotes">
+    <p><sup>1</sup> INFOLine / «Ведомости» / New Retail, 2025–2026. <sup>2</sup> Пошлины на вино из недружественных стран, тарифная политика РФ (с авг. 2023). <sup>3</sup> «Коммерсантъ», Meduza, план роста пошлин на крепкий алкоголь до €5/л с 01.05.2026. <sup>7</sup> Изменения ставок акцизов, 2025–2027. <sup>8</sup> РАТК; РБК «Вино» о повышении МРЦ, 2025–2026.</p>
+  </div>
+</section>
+
+<section class="sheet">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 03 · продолжение</span>
+
+  <h3>3.4. Структурные сдвиги: импортозамещение и «поворот на Восток»</h3>
+  <p>Главная тектоническая тенденция — <strong>вытеснение европейского импорта</strong>.
+  Импорт вина в РФ за 9 мес. 2025 г. снизился на 26,5% до 23,6 млн дал<sup>9</sup>; по отдельным
+  оценкам обвал достигал −32% г/г. Освободившуюся полку занимают: (1) российские производители
+  (Кубань, Крым, Дон), (2) «дружественные» поставщики — Грузия, Армения, ЮАР, Чили, Абхазия,
+  страны СНГ. Италия, Испания, Франция, Португалия сохраняют ТОП-5, но теряют объёмы.</p>
+
+  <div class="chart avoid-break">
+    <div class="ct">Доля отечественной продукции на рынке РФ, 2025 (оценка)</div>
+    <div class="bar-row"><span class="lab">Игристое вино</span><div class="bar-track"><div class="bar-fill bordo" style="width:74%">74%</div></div></div>
+    <div class="bar-row"><span class="lab">Тихое вино</span><div class="bar-track"><div class="bar-fill bordo" style="width:60%">≈60%</div></div></div>
+    <div class="bar-row"><span class="lab">Вино в целом (прогноз)</span><div class="bar-track"><div class="bar-fill bordo" style="width:63%">62–64%</div></div></div>
+    <div class="bar-row"><span class="lab">Коньяк/бренди (RU-розлив)</span><div class="bar-track"><div class="bar-fill terra" style="width:55%">знач.</div></div></div>
+    <div class="legend"><span><span class="dot" style="background:var(--bordo)"></span>Отеч. продукция вытесняет импорт</span></div>
+  </div>
+
+  <p>«Винодельческий союз» и «Ведомости» прогнозируют, что доля российского вина на внутреннем
+  рынке в ближайшие годы может превысить <strong>70%</strong><sup>10</sup>. Это не угроза для
+  премиального импортёра напрямую — российское вино и болгарский премиум играют в разных
+  «лигах» по цене и позиционированию — но это <em>сужает</em> пространство для дешёвого импорта
+  и повышает роль <strong>дифференциации через терруар, историю и гастрономию</strong>.</p>
+
+  <h3>3.5. Каналы дистрибуции: как товар доходит до потребителя</h3>
+  <table class="compact">
+    <caption>Каналы сбыта алкоголя в РФ и их роль для премиум-импортёра</caption>
+    <thead><tr><th>Канал</th><th>Доля рынка*</th><th>Барьер входа</th><th>Маржа</th><th>Роль для BSG</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Федеральные FMCG-сети</strong> (X5, Магнит, Лента)</td><td>высокая</td><td>Высокий (листинг, ретро-бонус)</td><td>низкая</td><td>Фаза 2–3, отобранный SKU</td></tr>
+      <tr><td><strong>Специализир. алкосети</strong> (К&Б, ВинЛаб, Ароматный мир)</td><td>растёт</td><td>Средний</td><td>средняя</td><td>Ключевой канал масштабирования</td></tr>
+      <tr><td><strong>Винотеки / бутики</strong></td><td>ниша</td><td>Низкий</td><td>высокая</td><td>Плацдарм имиджа, Фаза 1</td></tr>
+      <tr><td><strong>HoReCa</strong> (рестораны, бары, отели)</td><td>≈680 млрд ₽ (общепит)</td><td>Средний (сомелье)</td><td>высокая</td><td>Имидж + пробы, Фаза 1</td></tr>
+      <tr><td><strong>Онлайн / маркетплейсы</strong></td><td>ограничен законом</td><td>Юрид. барьер (запрет дист. продажи)</td><td>—</td><td>Только витрина/самовывоз</td></tr>
+      <tr><td><strong>Duty Free / travel retail</strong></td><td>ниша</td><td>Высокий</td><td>высокая</td><td>Опционально, Фаза 3</td></tr>
+    </tbody>
+  </table>
+  <p class="tbl-note">*Качественная оценка. Дистанционная (онлайн) продажа алкоголя в РФ законодательно ограничена — интернет используется как витрина с самовывозом/бронированием. Источник: РАТК, отраслевая аналитика.</p>
+
+  <div class="callout">
+    <div class="ct">Вывод раздела</div>
+    <p style="margin:0">Макросреда РФ <strong>враждебна дешёвому европейскому импорту</strong> и
+    <strong>благоприятна отечественному вину</strong> — но между этими полюсами существует
+    <strong>защищённая премиальная ниша</strong>, где болгарский продукт с историей и терруаром
+    конкурирует не ценой, а смыслом. Вход в эту нишу идёт через HoReCa и винотеки, а не через
+    ценовую войну на федеральной полке. Это фундамент всей последующей стратегии.</p>
+  </div>
+
+  <div class="footnotes">
+    <p><sup>9</sup> «Коммерсантъ»/РБК, импорт вина 9 мес. 2025: 23,6 млн дал (−26,5%). <sup>10</sup> «Ведомости», «Винодельческий союз», прогноз доли RU-вина >70%. Общепит РФ 2025: ≈679,4 млрд ₽ (TAdviser).</p>
+  </div>
+</section>
+
+<!-- ============================================================ SECTION 4: BRANDY -->
+<section class="sheet page-break">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 04 · Часть I</span>
+  <h2 class="section-title">Анализ рынка<br>бренди и коньяка</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">В России слово «коньяк» юридически применяется к отечественному выдержанному
+  виноградному дистилляту, тогда как импортный виноградный дистиллят маркируется как
+  <strong>«бренди»</strong> (и, для Франции, «коньяк» как защищённое наименование). Black Sea
+  Gold выпускает выдержанные бренди — эта категория для нас профильная. Рынок сокращается в
+  литрах, но <em>премиумизируется</em>, что играет нам на руку.</p>
+
+  <h3>4.1. Объём и динамика</h3>
+  <div class="stat-row">
+    <div class="stat"><div class="v">14,8<small> млн дал</small></div><div class="l">Рынок коньяка/бренди РФ, 2025</div><div class="d down">▼ 8,2% г/г</div></div>
+    <div class="stat"><div class="v">7,1<small> млн дал</small></div><div class="l">Розн. продажи, янв–июль 2025</div><div class="d down">▼ 9,8%</div></div>
+    <div class="stat"><div class="v">8,4<small> млн дал</small></div><div class="l">Произв-во коньяка в РФ, 2025</div><div class="d down">▼ 13,3%</div></div>
+    <div class="stat"><div class="v">472<small> ₽</small></div><div class="l">МРЦ бренди, 0,5 л (2025)</div><div class="d up">▲ 17,1%</div></div>
+  </div>
+
+  <p>Розничные продажи коньяка/бренди в РФ упали на <strong>8,2%</strong> за 2025 г. до 14,8 млн
+  дал<sup>11</sup> — самое заметное снижение среди крепких напитков. Причина прямая: рост МРЦ
+  (бренди +17,1% до 472 ₽/0,5 л; коньяк +17,1% до 651 ₽)<sup>8</sup> обрушил спрос прежде всего
+  на <em>дешёвые</em> напитки. Производство коньяка в РФ, после роста в 2024 г. (+10,2%), в
+  2025 г. сократилось на 13,3% до 8,4 млн дал<sup>12</sup>.</p>
+
+  <h3>4.2. Ключевой тренд: премиумизация и уход эконома</h3>
+  <p>Падение сосредоточено в нижнем ценовом сегменте — именно там МРЦ «отрезала» покупателя.
+  При этом <strong>верхние сегменты устойчивы или растут</strong>: продажи французского коньяка
+  в РФ в 2025 г. выросли на <strong>+10%</strong> вопреки общему спаду<sup>13</sup>. Это
+  подтверждает главную гипотезу: <em>деньги в категории мигрируют вверх</em>. Доля ТОП-5
+  брендов впервые превысила половину — 51% против 46% в 2024<sup>14</sup>, то есть рынок
+  консолидируется вокруг сильных марок.</p>
+
+  <div class="chart avoid-break">
+    <div class="ct">Разнонаправленная динамика внутри категории бренди/коньяк, 2025</div>
+    <div class="bar-row"><span class="lab">Эконом (&lt;600 ₽)</span><div class="bar-track"><div class="bar-fill muted" style="width:28%;justify-content:flex-start;padding-left:2mm;color:var(--neg)">▼ падение</div></div></div>
+    <div class="bar-row"><span class="lab">Средний (600–1500 ₽)</span><div class="bar-track"><div class="bar-fill terra" style="width:52%">стабильно</div></div></div>
+    <div class="bar-row"><span class="lab">Премиум (1500–4000 ₽)</span><div class="bar-track"><div class="bar-fill" style="width:70%">▲ рост</div></div></div>
+    <div class="bar-row"><span class="lab">Франц. коньяк (импорт)</span><div class="bar-track"><div class="bar-fill bordo" style="width:78%">+10%</div></div></div>
+  </div>
+
+  <h3>4.3. Конкурентный ландшафт категории</h3>
+  <p>Рынок бренди/коньяка РФ делится на четыре группы игроков (подробная бренд-карта — Раздел 7):</p>
+  <table class="compact">
+    <caption>Группы конкурентов в категории бренди/коньяк</caption>
+    <thead><tr><th>Группа</th><th>Примеры брендов</th><th>Сегмент</th><th>Угроза для BSG</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Российский коньяк</strong></td><td>Кизляр, Дербент, «Старейшина», КВ/КС</td><td>эконом–средний</td><td>Низкая (др. лига по цене/имиджу)</td></tr>
+      <tr><td><strong>Армянский бренди</strong></td><td>Арарат (Ararat), Ной (Noy), «Двин»</td><td>средний–премиум</td><td><strong>Высокая</strong> (сильный имидж, «наш»)</td></tr>
+      <tr><td><strong>Грузинский бренди</strong></td><td>«Сараджишвили», «Старый Кахети»</td><td>средний–премиум</td><td>Средняя</td></tr>
+      <tr><td><strong>Франц./европ. коньяк</strong></td><td>Hennessy, Martell, Courvoisier, Metaxa (GR)</td><td>премиум–люкс</td><td>Средняя (ценовой потолок выше)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout terra avoid-break">
+    <div class="ct">Главный конкурент-ориентир: армянский бренди</div>
+    <p style="margin:0">Армянский бренди (прежде всего <strong>Ararat</strong>) — эталон
+    «доступного премиума» с эмоциональной привязкой российского потребителя. Для Black Sea
+    Gold это одновременно <strong>ориентир по цене</strong> (полка 1 500–3 500 ₽ за выдержанные
+    экспрессии) и <strong>образец нарратива</strong> (терруар + история + выдержка). Наша
+    дифференциация — «черноморский» бренди с болгарским происхождением как <em>новизна</em>
+    для искушённого потребителя, уставшего от привычных марок.</p>
+  </div>
+
+  <h3>4.4. Позиция Black Sea Gold в категории</h3>
+  <p>Black Sea Gold производит виноградные бренди (в том числе выдержанные «звёздные»
+  экспрессии — на международном рынке известна линейка Star Brandy / «5 звёзд»)<sup>15</sup>.
+  Целевое позиционирование в РФ — <strong>верхний-средний и премиум</strong> (полка
+  ≈ 1 800–3 500 ₽), с акцентом на: происхождение (черноморское побережье, Поморие), историю
+  винодельни (с 1932 г.), и «европейское качество по разумной цене». Тарифная защита (€3–5/л
+  спирта) на этой полке — незначительная доля цены, поэтому мы не проигрываем экономике.</p>
+
+  <div class="footnotes">
+    <p><sup>8</sup> РАТК, МРЦ 2025. <sup>11</sup> A.List, рынок коньяка/бренди 2025: 14,8 млн дал (−8,19%). <sup>12</sup> РАТК, производство коньяка 2025: 8,4 млн дал (−13,3%). <sup>13</sup> «Коммерсантъ», франц. коньяк +10% в 2025. <sup>14</sup> Отраслевая аналитика, доля ТОП-5 = 51%. <sup>15</sup> Wine-Searcher, Black Sea Gold Star Brandy, Pomorie.</p>
+  </div>
+</section>
+
+<!-- ============================================================ SECTION 5: RAKIA -->
+<section class="sheet page-break">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 05 · Часть I</span>
+  <h2 class="section-title">Анализ рынка ракии<br>и фруктовых дистиллятов</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">Ракия — балканский фруктовый дистиллят (виноградный, сливовый, абрикосовый) —
+  в России не выделена в отдельную категорию учёта и остаётся <strong>нишей</strong>. Но именно
+  ниша здесь — возможность: категория «эмерджентная», без доминирующих брендов, и совпадает с
+  двумя сильными потребительскими трендами — <em>гастрономизацией</em> и <em>интересом к
+  аутентичным крепким напиткам</em>.</p>
+
+  <h3>5.1. Состояние категории в РФ</h3>
+  <p>Ракия в РФ статистически «прячется» внутри товарных групп «прочие спиртные напитки» /
+  «дистилляты фруктовые» / «бренди» (в зависимости от сырья и выдержки). Отдельного публичного
+  учёта РАТК по ракии нет — это индикатор <strong>незрелости категории</strong>. Присутствие на
+  полке ограничено: балканские рестораны, специализированные винотеки, гастрономические бутики.
+  Ближайшие «понятные» потребителю аналоги — граппа (Италия), чача (Грузия), ракы (Турция),
+  сливовица (Балканы/Ц. Европа), палинка (Венгрия).</p>
+
+  <div class="stat-row three">
+    <div class="stat"><div class="v">Ниша</div><div class="l">Статус категории в РФ — нет отдельного учёта</div><div class="d up">▲ потенциал «чистого холста»</div></div>
+    <div class="stat"><div class="v">0</div><div class="l">Доминирующих брендов ракии в федеральной рознице</div><div class="d up">▲ нет лидера</div></div>
+    <div class="stat"><div class="v">HoReCa</div><div class="l">Основной релевантный канал входа</div><div class="d">гастро-тренд</div></div>
+  </div>
+
+  <h3>5.2. Аналоги и ценовые ориентиры</h3>
+  <p>Поскольку прямых конкурентов-ракий мало, позиционирование строится относительно категории
+  <strong>«крафтовые/аутентичные фруктовые дистилляты»</strong>. Ценовые ориентиры аналогов на
+  полке (индикативно, 2025–2026):</p>
+  <table class="compact">
+    <caption>Ценовые ориентиры категории фруктовых дистиллятов (индикативно, полка РФ)</caption>
+    <thead><tr><th>Продукт</th><th>Происхождение</th><th class="num">Цена, ₽/0,5–0,7 л</th><th>Позиционирование</th></tr></thead>
+    <tbody>
+      <tr><td>Чача</td><td>Грузия</td><td class="num">900–2 500</td><td>Аутентичный, «наш» гость</td></tr>
+      <tr><td>Граппа</td><td>Италия</td><td class="num">1 800–6 000</td><td>Премиум диджестив</td></tr>
+      <tr><td>Ракы (Rakı)</td><td>Турция</td><td class="num">1 500–3 500</td><td>Этно-гастрономический</td></tr>
+      <tr><td>Сливовица / палинка</td><td>Балканы / Венгрия</td><td class="num">1 200–3 000</td><td>Аутентичный, крафт</td></tr>
+      <tr><td><strong>Ракия Black Sea Gold / SIS</strong></td><td><strong>Болгария</strong></td><td class="num"><strong>1 500–3 200</strong></td><td><strong>Черноморский крафт-диджестив</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.3. Стратегическая роль ракии в портфеле</h3>
+  <div class="callout bordo avoid-break">
+    <div class="ct">Ракия как «спецназ» портфеля</div>
+    <p style="margin:0 0 2mm">Ракия <strong>не является объёмным драйвером</strong> и не должна
+    им быть. Её роль — <strong>стратегическая дифференциация</strong>:</p>
+    <ul style="margin:0 0 0 4mm">
+      <li><strong>Гастрономический «крючок».</strong> Ракия — идеальный аргумент для сомелье и
+      барменов: уникальный диджестив, история, ритуал подачи. Открывает дверь в HoReCa.</li>
+      <li><strong>Знак аутентичности.</strong> Наличие «настоящей болгарской ракии» валидирует
+      весь портфель как подлинный, а не «маркетинговый» болгарский бренд.</li>
+      <li><strong>Высокая маржа при малом объёме.</strong> Нишевый премиум = минимальная
+      ценовая конкуренция и максимальная наценка на кейс.</li>
+    </ul>
+  </div>
+
+  <p>Тактически ракию выводим <strong>во вторую очередь</strong> (мес. 4–9), после того как
+  вина/игристое сформируют присутствие, — как «жемчужину» гастрономической программы и повод
+  для событий (дегустации, ужины с шеф-поварами). Объёмный план по ракии консервативный:
+  ≈ 5–8% совокупного объёма портфеля в кейсах, но заметно выше средней маржа.</p>
+
+  <div class="footnotes">
+    <p>Категория «ракия» не выделена в публичной статистике РАТК; оценки основаны на анализе смежных категорий фруктовых дистиллятов и наблюдениях полки федеральной/специализированной розницы, 2025–2026. Цены индикативны.</p>
+  </div>
+</section>
+
+<!-- ============================================================ SECTION 6: WINE -->
+<section class="sheet page-break">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 06 · Часть I</span>
+  <h2 class="section-title">Анализ рынка вин</h2>
+  <div class="divider-rule"></div>
+
+  <p class="lead">Вино — ядро портфеля Black Sea Gold (белые, игристые, мускаты; плюс красные
+  Katarzyna). Рынок вина РФ переживает <strong>самую сильную трансформацию за десятилетие</strong>:
+  импорт из ЕС рушится, отечественное вино захватывает полку, а премиальный импорт из
+  «нейтральных» источников ищет новое место. Понимание этой картины — ключ к позиционированию.</p>
+
+  <h3>6.1. Объём, деньги и структура</h3>
+  <div class="stat-row">
+    <div class="stat"><div class="v">0,63<small> трлн ₽</small></div><div class="l">Продажи вина в деньгах, 2025</div><div class="d up">▲ 14,7%</div></div>
+    <div class="stat"><div class="v">416<small> млн бут.</small></div><div class="l">Продажи RU тихих вин, 2025</div><div class="d up">▲ 4%</div></div>
+    <div class="stat"><div class="v">52,4<small> млн дал</small></div><div class="l">Произв-во тихих+игристых вин РФ, 2025</div><div class="d up">▲ 10–12%</div></div>
+    <div class="stat"><div class="v">23,6<small> млн дал</small></div><div class="l">Импорт вина, 9 мес. 2025</div><div class="d down">▼ 26,5%</div></div>
+  </div>
+
+  <p>Категория вина растёт в деньгах на <strong>+14,7%</strong> (до 0,63 трлн ₽) при умеренном
+  росте в литрах — снова ценовая премиумизация<sup>1</sup>. Производство тихих вин за 10 мес.
+  2025 г. выросло на 11% до 30,1 млн дал, игристых — на 8% до 14,6 млн дал<sup>16</sup>.
+  Импорт при этом обвалился: 23,6 млн дал за 9 мес. (−26,5%), в т.ч. 14,8 млн дал тихих,
+  4,1 млн дал игристых, 0,1 млн дал ликёрных<sup>9</sup>.</p>
+
+  <h3>6.2. Импортозамещение: главный сюжет</h3>
+  <div class="chart avoid-break">
+    <div class="ct">Доля отечественного вина в РФ по подкатегориям, 2025</div>
+    <div class="bar-row"><span class="lab">Игристое</span><div class="bar-track"><div class="bar-fill bordo" style="width:74%">74%</div></div></div>
+    <div class="bar-row"><span class="lab">Тихое</span><div class="bar-track"><div class="bar-fill bordo" style="width:60%">≈60%</div></div></div>
+    <div class="bar-row"><span class="lab">Всё вино (прогноз 2025)</span><div class="bar-track"><div class="bar-fill bordo" style="width:63%">62–64%</div></div></div>
+    <div class="bar-row"><span class="lab">Цель отрасли (2027–2028)</span><div class="bar-track"><div class="bar-fill" style="width:72%">&gt;70%</div></div></div>
+  </div>
+  <p>Продажи российских тихих вин выросли на 4% до 416 млн бутылок, доля отечественных марок
+  приблизилась к 60%; в игристом российские позиции достигли <strong>74%</strong><sup>17</sup>.
+  Драйверы импортозамещения: пошлины на импорт, господдержка виноградарства, закон о защите
+  российского виноделия, требование ГОСТ о ≥20% отечественных позиций в винных картах HoReCa.</p>
+
+  <h3>6.3. Структура импорта: кто поставляет вино в РФ</h3>
+  <table class="compact">
+    <caption>Поставщики импортного вина в РФ — расстановка сил, 2024–2025</caption>
+    <thead><tr><th>Страна</th><th>Статус</th><th>Позиция</th><th>Пошлина</th><th>Тренд</th></tr></thead>
+    <tbody>
+      <tr><td>Италия</td><td>Недружеств.</td><td>ТОП-1 импорт</td><td>25%, ≥$2/л</td><td class="num">▼</td></tr>
+      <tr><td>Грузия</td><td>Нейтральн.</td><td>ТОП-2, растёт</td><td>базовая</td><td class="num">▲</td></tr>
+      <tr><td>Испания</td><td>Недружеств.</td><td>ТОП-3</td><td>25%, ≥$2/л</td><td class="num">▼</td></tr>
+      <tr><td>Португалия / Франция</td><td>Недружеств.</td><td>ТОП-4/5</td><td>25%, ≥$2/л</td><td class="num">▼</td></tr>
+      <tr><td>ЮАР, Чили, Аргентина</td><td>Нейтральн.</td><td>растут</td><td>базовая</td><td class="num">▲</td></tr>
+      <tr><td>Армения, Абхазия, Сербия</td><td>Дружеств./нейтр.</td><td>ниша, растут</td><td>льготная/базовая</td><td class="num">▲</td></tr>
+      <tr><td><strong>Болгария</strong></td><td><strong>Недружеств. (ЕС)</strong></td><td><strong>обвал −65% (2024)</strong></td><td><strong>25%, ≥$2/л</strong></td><td class="num">▼▼</td></tr>
+    </tbody>
+  </table>
+  <p class="tbl-note">Топ-5 стран-импортёров: Италия, Грузия, Испания, Португалия, Франция. Источники: WineRetail, ФТС, РБК «Вино», 2024–2025.</p>
+
+  <div class="callout terra avoid-break">
+    <div class="ct">Парадокс Болгарии: обвал = возможность</div>
+    <p style="margin:0">Поставки болгарского вина в РФ упали на <strong>65% в 2024 г.</strong><sup>5</sup> —
+    категория практически обнулилась. Для нового игрока это <strong>не барьер, а преимущество</strong>:
+    нет «болгарской полки» с устоявшимися дешёвыми брендами, которые тянули бы восприятие вниз.
+    Black Sea Gold заходит на <em>чистый холст</em> и сам определяет, что такое «болгарское
+    премиальное вино» в глазах российского потребителя 2026 года — без груза ассоциаций с
+    массовым «Медвежьей кровью» 1980-х.</p>
+  </div>
+
+  <div class="footnotes">
+    <p><sup>1,16,17</sup> «Ведомости», «Винодельческий союз», WineRetail, 2025. <sup>5</sup> Импорт болгарского вина −65% (2024). <sup>9</sup> «Коммерсантъ», импорт вина 9 мес. 2025.</p>
+  </div>
+</section>
+
+<section class="sheet">
+  <span class="pagenum"></span><span class="foot-brand">КВИС ТРЕЙД</span>
+  <span class="section-num">Раздел 06 · продолжение</span>
+
+  <h3>6.4. Сегментация винного рынка по цене</h3>
+  <p>Полка вина РФ структурируется по ценовым «этажам». Импортозамещение и пошлины «сжали»
+  импорт снизу — дешёвый импорт вымыт, а российское вино занимает эконом и нижний-средний.
+  Импортному премиуму остаётся <strong>верхний-средний, премиум и супер-премиум</strong> —
+  именно туда мы позиционируем портфель.</p>
+
+  <table class="compact">
+    <caption>Ценовые сегменты вина на полке РФ (0,75 л) и целевая зона BSG</caption>
+    <thead><tr><th>Сегмент</th><th class="num">Цена, ₽</th><th>Кто доминирует</th><th class="c">Зона BSG</th></tr></thead>
+    <tbody>
+      <tr><td>Эконом</td><td class="num">&lt; 400</td><td>RU массовое, пакет</td><td class="c">—</td></tr>
+      <tr><td>Нижний-средний</td><td class="num">400–700</td><td>RU (Кубань, Дон), Грузия</td><td class="c">—</td></tr>
+      <tr><td>Средний</td><td class="num">700–1 200</td><td>RU премиум, Грузия, ЮАР, Чили</td><td class="c">○</td></tr>
+      <tr><td><strong>Верхний-средний</strong></td><td class="num"><strong>1 200–2 500</strong></td><td>Италия, Испания, RU-топ, Грузия-топ</td><td class="c"><strong>●●</strong></td></tr>
+      <tr><td><strong>Премиум</strong></td><td class="num"><strong>2 500–5 000</strong></td><td>Франция, Италия, «гаражисты» РФ</td><td class="c"><strong>●●●</strong></td></tr>
+      <tr><td>Супер-премиум</td><td class="num">&gt; 5 000</td><td>Франция, топ-Италия</td><td class="c">○ (Katarzyna Reserva)</td></tr>
+    </tbody>
+  </table>
+  <p class="tbl-note">●●● — ядро; ●● — присутствие; ○ — точечно; — вне фокуса.</p>
+
+  <h3>6.5. Портфель Black Sea Gold в винной категории</h3>
+  <p>Портфель закрывает три растущие подкатегории с разными ролями:</p>
+  <table class="compact">
+    <thead><tr><th>Линейка</th><th>Категория</th><th>Целевая полка, ₽</th><th>Роль</th></tr></thead>
+    <tbody>
+      <tr><td><strong>BSG — белые, Шардоне Grand Prix</strong></td><td>Тихое белое</td><td class="num">1 400–2 800</td><td>«Флагман-визитка» (титулы)</td></tr>
+      <tr><td><strong>BSG — игристое / мускаты</strong></td><td>Игристое</td><td class="num">1 200–2 400</td><td>Объёмный драйвер, HoReCa by-the-glass</td></tr>
+      <tr><td><strong>BSG — красные (Мавруд, купажи)</strong></td><td>Тихое красное</td><td class="num">1 500–3 000</td><td>Терруарная новизна (местный сорт)</td></tr>
+      <tr><td><strong>Katarzyna Estate</strong></td><td>Премиум красное</td><td class="num">2 500–6 000+</td><td>Имиджевый «якорь» портфеля</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout avoid-break">
+    <div class="ct">Три козыря винного портфеля</div>
+    <ul style="margin:0 0 0 4mm">
+      <li><strong>Титулы белого.</strong> «Самое титулованное белое вино Болгарии» (Chardonnay
+      Grand Prix)<sup>6</sup> — готовый нарратив доверия для сомелье и полки.</li>
+      <li><strong>Местные сорта (Мавруд, Рубин).</strong> Автохтонные фракийские сорта — то,
+      чего нет у российских и грузинских конкурентов; аргумент «попробуйте то, что нигде больше
+      не пьют».</li>
+      <li><strong>Черноморский терруар.</strong> Поморие и черноморское побережье — понятная
+      россиянину география («наше» море), но «европейское» качество. Мостик узнавания.</li>
+    </ul>
+  </div>
+
+  <h3>6.6. Выводы по винному рынку</h3>
+  <p>Винный рынок РФ жёсток к дешёвому импорту, но <strong>оставляет премиальную нишу для
+  дифференцированного продукта с историей</strong>. Обвал болгарского импорта расчистил
+  категорию от слабых брендов. Портфель Black Sea Gold + Katarzyna даёт три захода: титулованное
+  белое (доверие), игристое/мускат (объём и HoReCa), автохтонные красные (уникальность).
+  Дальше — вопрос дистрибуции и сторителлинга, а не наличия продукта.</p>
+
+  <div class="footnotes">
+    <p><sup>6</sup> Black Sea Gold Pomorie: Chardonnay Grand Prix — «самое титулованное белое вино Болгарии»; 650 га собственных виноградников; основана в 1932 г. Katarzyna Estate: регион Сакар, Фракийская долина; сорта Мавруд, Рубин, Каберне, Мерло, Сира, Мальбек.</p>
+  </div>
+</section>
+
+<!-- APPEND-MARKER -->
+
+</body>
+</html>
